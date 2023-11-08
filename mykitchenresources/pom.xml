@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.itproject</groupId>
-	<artifactId>mykitchenresources</artifactId>
+	<artifactId>MyKitchenResources</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mykitchenresources</name>
+	<name>MyKitchenResources</name>
 	<description>myKitchen Spring Boot Project</description>
 	<properties>
 		<java.version>17</java.version>
