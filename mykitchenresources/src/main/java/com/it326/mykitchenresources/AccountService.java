@@ -4,8 +4,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.it326.mykitchenresources.Account;
-
 @Service
 public class AccountService {
 
