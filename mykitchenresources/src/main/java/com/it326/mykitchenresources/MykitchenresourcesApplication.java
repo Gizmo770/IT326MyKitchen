@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.it326.mykitchenresources.dbs.*")
-@ComponentScan(basePackages = { "com.it326.mykitchenresources.*" })
+@EnableJpaRepositories("com.it326.mykitchenresources.*")
+@ComponentScan(basePackages = "com.it326.mykitchenresources.*")
 @EntityScan("com.it326.mykitchenresources.*")  
 public class MykitchenresourcesApplication {
 
