@@ -30,6 +30,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- Password Hashing Dependency -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version> <!-- or the latest version available -->
+		</dependency>
+
 		<!-- Database Connection Dependencies -->
 		<dependency>
 			<groupId>com.mysql</groupId>
