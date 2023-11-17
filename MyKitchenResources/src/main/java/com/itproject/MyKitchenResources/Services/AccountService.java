@@ -3,9 +3,11 @@ package com.itproject.MyKitchenResources.Services;
 import com.itproject.MyKitchenResources.Repositories.AccountRepository;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
 import com.itproject.MyKitchenResources.Entities.Account;
 
+@Service
 public class AccountService {
     private final AccountRepository accountRepository;
 

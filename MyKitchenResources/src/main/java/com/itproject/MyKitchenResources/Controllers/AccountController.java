@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itproject.MyKitchenResources.Services.AccountService;
@@ -13,11 +14,12 @@ import com.itproject.MyKitchenResources.Entities.Account;
 import com.itproject.MyKitchenResources.Entities.AccountDTO;
 
 @RestController
+@RequestMapping("/api")
 public class AccountController {
 
+    @Autowired
     private final AccountService accountService;
 
-    @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
