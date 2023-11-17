@@ -1,4 +1,4 @@
-package com.it326.mykitchenresources.entities;
+package com.it326.mykitchenresources;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

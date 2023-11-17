@@ -1,10 +1,9 @@
-package com.it326.mykitchenresources.services;
+package com.it326.mykitchenresources;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import com.it326.mykitchenresources.dbs.AccountDb;
-import com.it326.mykitchenresources.entities.Account;
+import com.it326.mykitchenresources.Account;
 
 @Service
 public class AccountService {

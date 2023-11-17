@@ -1,4 +1,4 @@
-package com.it326.mykitchenresources.entities;
+package com.it326.mykitchenresources;
 
 public class AccountDTO {
 
