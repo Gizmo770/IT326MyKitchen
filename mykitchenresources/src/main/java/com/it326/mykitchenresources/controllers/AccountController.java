@@ -16,12 +16,8 @@ import com.it326.mykitchenresources.services.AccountService;
 @RequestMapping("/account")
 public class AccountController {
 
-    private final AccountService accountService;
-
     @Autowired
-    public AccountController(AccountService accountService) {
-        this.accountService = accountService;
-    }
+    private AccountService accountService;
 
     @RequestMapping("/hello")
     public String hello() {

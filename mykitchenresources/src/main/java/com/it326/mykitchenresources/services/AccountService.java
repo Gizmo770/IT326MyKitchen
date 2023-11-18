@@ -1,6 +1,7 @@
 package com.it326.mykitchenresources.services;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.it326.mykitchenresources.dbs.AccountDb;
@@ -9,11 +10,8 @@ import com.it326.mykitchenresources.entities.Account;
 @Service
 public class AccountService {
 
-    private final AccountDb accountDb;
-
-    public AccountService(AccountDb accountDb) {
-        this.accountDb = accountDb;
-    }
+    @Autowired
+    private AccountDb accountDb;
 
     public Account createAccount(String name, String username, String password) {
         Account account = new Account();
