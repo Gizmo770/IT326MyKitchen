@@ -4,7 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.List;
+
 import jakarta.persistence.Column;
 
 @Entity
@@ -23,6 +27,9 @@ public class Account {
 
     @Column(name = "hashed_password", length = 45)
     private String hashedPassword;
+
+    @OneToMany(mappedBy = "account")
+    private List<ShoppingList> shoppingLists;
     
     // Constructors, getters, setters, etc.
     public Account(){}
