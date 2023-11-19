@@ -1,5 +1,7 @@
 package com.it326.mykitchenresources.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,15 +13,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.util.List;
-
 @Entity
-@Table(name = "shopping_list")
-public class ShoppingList {
+@Table(name = "fridge")
+public class Fridge {
     @Id
-    @Column(name = "list_id")
+    @Column(name = "fridge_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long listId;
+    private Long fridgeId;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -28,19 +28,18 @@ public class ShoppingList {
     // Association table, doesn't exist as a class.
     @ManyToMany
     @JoinTable(
-        name = "ingredient_list",
-        joinColumns = @JoinColumn(name = "list_id"),
+        name = "ingredient_fridge",
+        joinColumns = @JoinColumn(name = "fridge_id"),
         inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<Ingredient> ingredientsInList;
+    private List<Ingredient> ingredientsInFridge;
 
-
-    public ShoppingList() {
+    public Fridge() {
     }
 
-    public ShoppingList(Account account, List<Ingredient> ingredients) {
+    public Fridge(Account account, List<Ingredient> ingredients) {
         this.account = account;
-        this.ingredientsInList = ingredients;
+        this.ingredientsInFridge = ingredients;
     }
 
     public Account getAccount() {
@@ -52,10 +51,10 @@ public class ShoppingList {
     }
 
     public List<Ingredient> getIngredients() {
-        return ingredientsInList;
+        return ingredientsInFridge;
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredientsInList = ingredients;
+        this.ingredientsInFridge = ingredients;
     }
 }

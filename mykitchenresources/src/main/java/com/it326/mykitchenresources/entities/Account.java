@@ -4,11 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
-import java.util.List;
-
 import jakarta.persistence.Column;
 
 @Entity
@@ -28,8 +25,11 @@ public class Account {
     @Column(name = "hashed_password", length = 45)
     private String hashedPassword;
 
-    @OneToMany(mappedBy = "account")
-    private List<ShoppingList> shoppingLists;
+    @OneToOne(mappedBy = "account")
+    private ShoppingList shoppingList;
+
+    @OneToOne(mappedBy = "account")
+    private Fridge fridge;
     
     // Constructors, getters, setters, etc.
     public Account(){}
@@ -64,5 +64,17 @@ public class Account {
     }
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
+    }
+    public ShoppingList getShoppingList() {
+        return shoppingList;
+    }
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
+    }
+    public Fridge getFridge() {
+        return fridge;
+    }
+    public void setFridge(Fridge fridge) {
+        this.fridge = fridge;
     }
 }

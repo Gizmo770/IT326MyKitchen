@@ -16,11 +16,11 @@ public class ShoppingListService {
     @Autowired
     private ShoppingListDb shoppingListDb;
 
-    public ShoppingList createShoppingList(Account account, ArrayList<Ingredient> ingredients) {
+    public void createShoppingList(Account account, ArrayList<Ingredient> ingredients) {
 
         ShoppingList shoppingList = new ShoppingList();
         shoppingList.setIngredients(ingredients);
 
-        return shoppingListDb.save(shoppingList);
+        shoppingListDb.save(shoppingList);
     }
 }
