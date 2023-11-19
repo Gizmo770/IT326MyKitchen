@@ -32,8 +32,8 @@ public class MyKitchenController {
 
     @PostMapping("/account/create")
     @ResponseBody
-	public ResponseEntity<String> createAccount(String username, String password, String email) {
-		return accountController.createAccount(username, password, email);
+	public ResponseEntity<String> createAccount(String name, String username, String password) {
+		return accountController.createAccount(name, username, password);
 	}
 
     @PostMapping("/shopping-list/create")

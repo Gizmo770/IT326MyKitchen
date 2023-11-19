@@ -22,8 +22,8 @@ public class Account {
     @Column(name = "username", length = 45)
     private String username;
 
-    @Column(name = "hashed_password", length = 45)
-    private String hashedPassword;
+    @Column(name = "hashed_password", length = 60, columnDefinition = "CHAR(60) BINARY")
+    private String hashedPassword;    
 
     @OneToOne(mappedBy = "account")
     private ShoppingList shoppingList;
