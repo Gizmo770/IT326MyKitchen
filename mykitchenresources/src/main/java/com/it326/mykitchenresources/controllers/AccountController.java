@@ -16,7 +16,7 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping("/hello-account")
-    public String hello() {
+    public String helloAccount() {
         return "Hello, world!";
     }
 

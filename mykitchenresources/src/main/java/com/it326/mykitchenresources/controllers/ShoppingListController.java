@@ -19,8 +19,8 @@ public class ShoppingListController {
     private ShoppingListService shoppingListService;
 
     @RequestMapping("/hello-list")
-    public String hello() {
-        return "Hello, world!";
+    public String helloList() {
+        return "Hello, list!";
     }
 
     @PostMapping("/new-list/")

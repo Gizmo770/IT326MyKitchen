@@ -22,6 +22,12 @@ public class MyKitchenController {
     @Autowired
     private FridgeController fridgeController;
 
+    @RequestMapping("/hello-kitchen")
+    @ResponseBody
+    public String helloKitchen() {
+        return "Hello, kitchen!";
+    }
+
     @PostMapping("/account/create")
     @ResponseBody
 	public ResponseEntity<String> createAccount(String username, String password, String email) {
