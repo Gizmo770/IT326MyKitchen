@@ -23,6 +23,6 @@ public class RecipeService {
     }
 
     public String searchRecipesByString(String ingredients) {
-        return recipeDb.getRecipeData(ingredients);
+        return recipeDb.searchRecipeData(ingredients);
     }
 }

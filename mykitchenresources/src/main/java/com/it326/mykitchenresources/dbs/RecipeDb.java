@@ -21,7 +21,7 @@ public class RecipeDb {
         this.restTemplate = restTemplate;
     }
 
-    public String getRecipeData(String ingredients) {
+    public String searchRecipeData(String ingredients) {
         String url = UriComponentsBuilder.fromHttpUrl(appUrl)
         .queryParam("q", ingredients)
         .queryParam("app_id", appId)
