@@ -18,12 +18,16 @@ public class RecipeService {
     @Autowired
     private RecipeDb recipeDb;
 
+    @Autowired
+    private AccountService accountService;
+
     private final ObjectMapper objectMapper;
 
     public RecipeService(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
+    
     public RecipeDetails[] searchRecipesByFridge(Fridge fridge) {
         String fridgeIngredientString = "";
 
@@ -40,33 +44,19 @@ public class RecipeService {
         return mapJsonToRecipes(recipeJson);
     }
 
-// Helper method to map JSON to RecipeDetails objects
-private RecipeDetails[] mapJsonToRecipes(String recipeJson) {
-    try {
-        Recipe response = objectMapper.readValue(recipeJson, Recipe.class);
-        if (response != null && response.getHits() != null) {
-            return response.getHits()
-                    .stream()
-                    .map(RecipeHit::getRecipe)
-                    .toArray(RecipeDetails[]::new);
+    // Helper method to map JSON to RecipeDetails objects
+    private RecipeDetails[] mapJsonToRecipes(String recipeJson) {
+        try {
+            Recipe response = objectMapper.readValue(recipeJson, Recipe.class);
+            if (response != null && response.getHits() != null) {
+                return response.getHits()
+                        .stream()
+                        .map(RecipeHit::getRecipe)
+                        .toArray(RecipeDetails[]::new);
+            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace(); // Handle or log the exception
         }
-    } catch (JsonProcessingException e) {
-        e.printStackTrace(); // Handle or log the exception
+        return new RecipeDetails[0]; // Return an empty array or handle null response
     }
-    return new RecipeDetails[0]; // Return an empty array or handle null response
-}
-
-    // public String serachRecipesByFridge(Fridge fridge) {
-    //     String ingredientString = "";
-
-    //     for(Ingredient ingredient : fridge.getIngredients()) {
-    //         ingredientString += ingredient.getName() + " ";
-    //     }
-
-    //     return searchRecipesByString(ingredientString);
-    // }
-
-    // public String searchRecipesByString(String ingredients) {
-    //     return recipeDb.searchRecipeData(ingredients);
-    // }
 }

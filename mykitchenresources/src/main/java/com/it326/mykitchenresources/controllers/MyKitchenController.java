@@ -1,6 +1,5 @@
 package com.it326.mykitchenresources.controllers;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +42,18 @@ public class MyKitchenController {
     // Works
     @PostMapping("/account/create")
     @ResponseBody
-	public ResponseEntity<String> createAccount(String name, String username, String password) {
+	public ResponseEntity<String> createAccount(
+        @RequestParam String name, 
+        @RequestParam String username, 
+        @RequestParam String password) {
 		return accountController.createAccount(name, username, password);
 	}
 
     // Works
     @DeleteMapping("/account/delete")
     @ResponseBody
-    public ResponseEntity<String> deleteAccount(Integer accountId) {
+    public ResponseEntity<String> deleteAccount(
+        @PathVariable Integer accountId) {
         return accountController.deleteAccount(accountId);
     }
 
@@ -60,7 +63,8 @@ public class MyKitchenController {
     // Works
     @PostMapping("/shopping-list/create")
     @ResponseBody
-    public ResponseEntity<String> createShoppingList(Integer currentAccId) {
+    public ResponseEntity<String> createShoppingList(
+        @PathVariable Integer currentAccId) {
         return shoppingListController.createShoppingList(currentAccId);
     }
 
@@ -102,14 +106,16 @@ public class MyKitchenController {
     // TODO: Test and debug this function when Fridge with Ingredients are implemented
     @RequestMapping("/recipe/fridge/search")
     @ResponseBody
-    public RecipeDetails[] searchRecipesByFridge(Account currentAccount) {
+    public RecipeDetails[] searchRecipesByFridge(
+        @PathVariable Account currentAccount) {
         return recipeController.searchRecipesByFridge(currentAccount);
     }
 
     // Works
     @RequestMapping("/recipe/string/search")
     @ResponseBody
-    public RecipeDetails[] searchRecipesByString(String ingredients) {
+    public RecipeDetails[] searchRecipesByString(
+        @RequestParam String ingredients) {
         return recipeController.searchRecipesByString(ingredients);
     }
 }
