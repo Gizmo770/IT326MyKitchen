@@ -3,7 +3,6 @@ package com.it326.mykitchenresources.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +22,6 @@ public class ShoppingListController {
         return "Hello, list!";
     }
 
-    @PostMapping("/new-list/")
     public ResponseEntity<String> createShoppingList(Account account) {
         System.out.println("Creating shopping list...");
 
