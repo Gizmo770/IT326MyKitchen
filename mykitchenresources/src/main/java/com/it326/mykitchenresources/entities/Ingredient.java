@@ -24,18 +24,14 @@ public class Ingredient {
     @Column(name = "expiration_date")
     private Date expirationDate;
 
-    @Column(name = "priority_level", length = 45)
-    private String priorityLevel;
-
     //Constructors, getters, setters, etc...
     public Ingredient() {
     }
 
-    public Ingredient(String name, double quantity, Date expirationDate, String priorityLevel) {
+    public Ingredient(String name, double quantity, Date expirationDate) {
         this.name = name;
         this.quantity = quantity;
         this.expirationDate = expirationDate;
-        this.priorityLevel = priorityLevel;
     }
 
     public String getName() {
@@ -60,13 +56,5 @@ public class Ingredient {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
-    }
-
-    public void getPriorityLevel(String priorityLevel) {
-        this.priorityLevel = priorityLevel;
-    }
-
-    public void setPriorityLevel(String priorityLevel) {
-        this.priorityLevel = priorityLevel;
     }
 }

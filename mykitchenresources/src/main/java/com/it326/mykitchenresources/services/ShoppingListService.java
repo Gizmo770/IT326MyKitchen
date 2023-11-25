@@ -10,6 +10,7 @@ import com.it326.mykitchenresources.dbs.ShoppingListDb;
 import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.entities.Ingredient;
 import com.it326.mykitchenresources.entities.ShoppingList;
+import com.it326.mykitchenresources.entities.ShoppingListItems;
 
 @Service
 public class ShoppingListService {
@@ -24,7 +25,7 @@ public class ShoppingListService {
 
         ShoppingList shoppingList = new ShoppingList();
         shoppingList.setAccount(accountDb.findByAccountId(accountId));
-        shoppingList.setIngredients(new ArrayList<Ingredient>());
+        shoppingList.setIngredientsInShoppingList(new ArrayList<ShoppingListItems>());
 
         shoppingListDb.save(shoppingList);
     }
