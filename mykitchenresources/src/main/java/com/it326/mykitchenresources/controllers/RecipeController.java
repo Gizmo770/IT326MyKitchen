@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.it326.mykitchenresources.entities.Account;
-import com.it326.mykitchenresources.entities.recipe.Recipe;
 import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
 import com.it326.mykitchenresources.services.RecipeService;
 
