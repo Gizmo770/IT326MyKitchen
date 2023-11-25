@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.it326.mykitchenresources.entities.Account;
+import com.it326.mykitchenresources.entities.recipe.Recipe;
+import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
 import com.it326.mykitchenresources.services.RecipeService;
 
 @RestController
@@ -18,11 +20,13 @@ public class RecipeController {
         return "Hello, recipe!";
     }
 
-    public String searchRecipesByFridge(Account account) {
-        return recipeService.serachRecipesByFridge(account.getFridge());
+    public RecipeDetails[] searchRecipesByFridge(Account account) {
+        System.out.println("Getting recipe by fridge ingredients: " + account.getFridge().getIngredients() + "...");
+        return recipeService.searchRecipesByFridge(account.getFridge());
     }
 
-    public String searchRecipesByString(String ingredients) {
+    public RecipeDetails[] searchRecipesByString(String ingredients) {
+        System.out.println("Getting recipe by string: " + ingredients + "...");
         return recipeService.searchRecipesByString(ingredients);
     }
 }

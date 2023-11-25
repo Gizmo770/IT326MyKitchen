@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it326.mykitchenresources.entities.Account;
+import com.it326.mykitchenresources.entities.recipe.Recipe;
+import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
 
 @Controller
 public class MyKitchenController {
@@ -71,13 +73,13 @@ public class MyKitchenController {
     --------------------------- */
     @RequestMapping("/recipe/fridge/search")
     @ResponseBody
-    public String searchRecipesByFridge(Account currentAccount) {
+    public RecipeDetails[] searchRecipesByFridge(Account currentAccount) {
         return recipeController.searchRecipesByFridge(currentAccount);
     }
 
     @RequestMapping("/recipe/string/search")
     @ResponseBody
-    public String searchRecipesByString(String ingredients) {
+    public RecipeDetails[] searchRecipesByString(String ingredients) {
         return recipeController.searchRecipesByString(ingredients);
     }
 }

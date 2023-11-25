@@ -3,9 +3,14 @@ package com.it326.mykitchenresources.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it326.mykitchenresources.dbs.RecipeDb;
 import com.it326.mykitchenresources.entities.Fridge;
 import com.it326.mykitchenresources.entities.Ingredient;
+import com.it326.mykitchenresources.entities.recipe.Recipe;
+import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
+import com.it326.mykitchenresources.entities.recipe.RecipeHit;
 
 @Service
 public class RecipeService {
@@ -13,17 +18,55 @@ public class RecipeService {
     @Autowired
     private RecipeDb recipeDb;
 
-    public String serachRecipesByFridge(Fridge fridge) {
-        String ingredientString = "";
+    private final ObjectMapper objectMapper;
 
-        for(Ingredient ingredient : fridge.getIngredients()) {
-            ingredientString += ingredient.getName() + " ";
+    public RecipeService(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    public RecipeDetails[] searchRecipesByFridge(Fridge fridge) {
+        String fridgeIngredientString = "";
+
+        for (Ingredient ingredient : fridge.getIngredients()) {
+            fridgeIngredientString += ingredient.getName() + " ";
         }
 
-        return searchRecipesByString(ingredientString);
+        String recipeJson = recipeDb.searchRecipeData(fridgeIngredientString);
+        return mapJsonToRecipes(recipeJson);
     }
 
-    public String searchRecipesByString(String ingredients) {
-        return recipeDb.searchRecipeData(ingredients);
+    public RecipeDetails[] searchRecipesByString(String ingredients) {
+        String recipeJson = recipeDb.searchRecipeData(ingredients);
+        return mapJsonToRecipes(recipeJson);
     }
+
+// Helper method to map JSON to RecipeDetails objects
+private RecipeDetails[] mapJsonToRecipes(String recipeJson) {
+    try {
+        Recipe response = objectMapper.readValue(recipeJson, Recipe.class);
+        if (response != null && response.getHits() != null) {
+            return response.getHits()
+                    .stream()
+                    .map(RecipeHit::getRecipe)
+                    .toArray(RecipeDetails[]::new);
+        }
+    } catch (JsonProcessingException e) {
+        e.printStackTrace(); // Handle or log the exception
+    }
+    return new RecipeDetails[0]; // Return an empty array or handle null response
+}
+
+    // public String serachRecipesByFridge(Fridge fridge) {
+    //     String ingredientString = "";
+
+    //     for(Ingredient ingredient : fridge.getIngredients()) {
+    //         ingredientString += ingredient.getName() + " ";
+    //     }
+
+    //     return searchRecipesByString(ingredientString);
+    // }
+
+    // public String searchRecipesByString(String ingredients) {
+    //     return recipeDb.searchRecipeData(ingredients);
+    // }
 }
