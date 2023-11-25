@@ -69,9 +69,15 @@ public class MyKitchenController {
     /* --------------------------
     Recipe Controller Functions
     --------------------------- */
-    @RequestMapping("/recipe/search")
+    @RequestMapping("/recipe/fridge/search")
     @ResponseBody
     public String searchRecipesByFridge(Account currentAccount) {
         return recipeController.searchRecipesByFridge(currentAccount);
+    }
+
+    @RequestMapping("/recipe/string/search")
+    @ResponseBody
+    public String searchRecipesByString(String ingredients) {
+        return recipeController.searchRecipesByString(ingredients);
     }
 }

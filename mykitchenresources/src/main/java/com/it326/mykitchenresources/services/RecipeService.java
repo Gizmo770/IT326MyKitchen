@@ -10,6 +10,7 @@ import com.it326.mykitchenresources.entities.Ingredient;
 @Service
 public class RecipeService {
 
+    @Autowired
     private RecipeDb recipeDb;
 
     public String serachRecipesByFridge(Fridge fridge) {
