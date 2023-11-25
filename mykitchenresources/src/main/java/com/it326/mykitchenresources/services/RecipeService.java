@@ -19,7 +19,7 @@ public class RecipeService {
     private RecipeDb recipeDb;
 
     @Autowired
-    private AccountService accountService;
+    private FridgeService fridgeService;
 
     private final ObjectMapper objectMapper;
 
@@ -27,11 +27,12 @@ public class RecipeService {
         this.objectMapper = objectMapper;
     }
 
-    
-    public RecipeDetails[] searchRecipesByFridge(Fridge fridge) {
+
+    public RecipeDetails[] searchRecipesByFridge(Integer accountId) {
+        Fridge fridgeData = fridgeService.getFridgeByAccountId(accountId);
         String fridgeIngredientString = "";
 
-        for (Ingredient ingredient : fridge.getIngredients()) {
+        for (Ingredient ingredient : fridgeData.getIngredients()) {
             fridgeIngredientString += ingredient.getName() + " ";
         }
 

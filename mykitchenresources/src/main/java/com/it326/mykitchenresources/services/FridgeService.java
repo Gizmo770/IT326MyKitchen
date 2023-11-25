@@ -53,8 +53,12 @@ public class FridgeService {
         newIngredient.setExpirationDate(convertedDate);
         ingredientDb.save(newIngredient);
 
-        Fridge fridgeData = fridgeDb.findByAccount(accountService.findByAccountId(accountId));
+        Fridge fridgeData = getFridgeByAccountId(accountId);
         fridgeData.getIngredients().add(newIngredient);
         fridgeDb.save(fridgeData);
+    }
+
+    public Fridge getFridgeByAccountId(Integer accountId) {
+        return fridgeDb.findByAccount(accountService.findByAccountId(accountId));
     }
 }

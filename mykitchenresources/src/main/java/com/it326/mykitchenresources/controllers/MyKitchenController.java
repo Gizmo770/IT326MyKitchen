@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
 
 @Controller
@@ -95,8 +94,6 @@ public class MyKitchenController {
         return fridgeController.addIngredientToFridge(currentAccId, ingName, ingQuantity, ingExpDate);
     }
 
-    //TODO: Method for adding ingredient to fridge
-
     //TODO: Method for removing ingredient from fridge
 
 
@@ -107,8 +104,8 @@ public class MyKitchenController {
     @RequestMapping("/recipe/fridge/search")
     @ResponseBody
     public RecipeDetails[] searchRecipesByFridge(
-        @PathVariable Account currentAccount) {
-        return recipeController.searchRecipesByFridge(currentAccount);
+        @PathVariable Integer currentAccId) {
+        return recipeController.searchRecipesByFridge(currentAccId);
     }
 
     // Works
