@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it326.mykitchenresources.entities.Account;
@@ -73,15 +75,19 @@ public class MyKitchenController {
     // Works
     @PostMapping("/fridge/create")
     @ResponseBody
-    public ResponseEntity<String> createFridge(Integer currentAccId) {
+    public ResponseEntity<String> createFridge(
+        @PathVariable Integer currentAccId) {
         return fridgeController.createFridge(currentAccId);
     }
 
     // Works
     @PostMapping("/fridge/add-ingredient")
     @ResponseBody
-    public ResponseEntity<String> addIngredientToFridge(Integer currentAccId, 
-        String ingName, Optional<Double> ingQuantity, Optional<String> ingExpDate) {
+    public ResponseEntity<String> addIngredientToFridge(
+        @RequestParam Integer currentAccId,
+        @RequestParam String ingName,
+        @RequestParam(required = false) Optional<Double> ingQuantity,
+        @RequestParam(required = false) Optional<String> ingExpDate) {
         return fridgeController.addIngredientToFridge(currentAccId, ingName, ingQuantity, ingExpDate);
     }
 
