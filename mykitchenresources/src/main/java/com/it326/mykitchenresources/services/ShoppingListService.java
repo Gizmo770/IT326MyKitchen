@@ -20,11 +20,11 @@ public class ShoppingListService {
     @Autowired
     private AccountDb accountDb;
 
-    public void createShoppingList(Integer accountId, ArrayList<Ingredient> ingredients) {
+    public void createShoppingList(Integer accountId) {
 
         ShoppingList shoppingList = new ShoppingList();
-        shoppingList.setIngredients(ingredients);
         shoppingList.setAccount(accountDb.findByAccountId(accountId));
+        shoppingList.setIngredients(new ArrayList<Ingredient>());
 
         shoppingListDb.save(shoppingList);
     }

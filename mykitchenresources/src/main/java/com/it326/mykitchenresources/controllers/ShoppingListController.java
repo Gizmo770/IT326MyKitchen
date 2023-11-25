@@ -6,9 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.services.ShoppingListService;
-import com.it326.mykitchenresources.entities.Ingredient;
 import java.util.ArrayList;
 
 @RestController
@@ -27,7 +25,7 @@ public class ShoppingListController {
 
         // Create the shopping list
         try {
-            shoppingListService.createShoppingList(accountId, new ArrayList<Ingredient>());
+            shoppingListService.createShoppingList(accountId);
             return ResponseEntity.ok().body("Shopping list created successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating shopping list");
