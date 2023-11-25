@@ -35,12 +35,14 @@ public class MyKitchenController {
     /* ----------------------------
     Account Controller Functions
     ----------------------------- */
+    // Works
     @PostMapping("/account/create")
     @ResponseBody
 	public ResponseEntity<String> createAccount(String name, String username, String password) {
 		return accountController.createAccount(name, username, password);
 	}
 
+    // Works
     @DeleteMapping("/account/delete")
     @ResponseBody
     public ResponseEntity<String> deleteAccount(Integer accountId) {
@@ -50,6 +52,7 @@ public class MyKitchenController {
     /* ----------------------------------
     Shopping List Controller Functions
     ----------------------------------- */
+    // Works
     @PostMapping("/shopping-list/create")
     @ResponseBody
     public ResponseEntity<String> createShoppingList(Integer currentAccId) {
@@ -64,6 +67,7 @@ public class MyKitchenController {
     /* --------------------------
     Fridge Controller Functions
     --------------------------- */
+    // Works
     @PostMapping("/fridge/create")
     @ResponseBody
     public ResponseEntity<String> createFridge(Integer currentAccId) {
@@ -85,6 +89,7 @@ public class MyKitchenController {
         return recipeController.searchRecipesByFridge(currentAccount);
     }
 
+    // Works
     @RequestMapping("/recipe/string/search")
     @ResponseBody
     public RecipeDetails[] searchRecipesByString(String ingredients) {
