@@ -13,7 +13,7 @@ public class Ingredient {
 
     @Id
     @Column(name = "ingredient_id")
-    private int ingredientId;
+    private Long ingredientId;
 
     @Column(name = "name", length = 45)
     private String name;

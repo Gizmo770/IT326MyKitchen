@@ -6,9 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 @Table(name = "shopping_list")
 public class ShoppingList {
     @Id
-    @Column(name = "list_id")
+    @Column(name = "shopping_list_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long listId;
 
@@ -26,13 +25,8 @@ public class ShoppingList {
     private Account account;
 
     // Association table for the list of ingredients in the shopping list.
-    @ManyToMany
-    @JoinTable(
-        name = "shopping_list_ingredients",
-        joinColumns = @JoinColumn(name = "shopping_list_id"),
-        inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-    )
-    private List<Ingredient> shoppingIngredients;
+    @OneToMany(mappedBy = "shoppingList")
+    private List<ShoppingListIngredient> shoppingIngredients;
 
     public ShoppingList() {
     }
@@ -45,11 +39,11 @@ public class ShoppingList {
         this.account = account;
     }
 
-    public List<Ingredient> getIngredientsInShoppingList() {
+    public List<ShoppingListIngredient> getIngredientsInShoppingList() {
         return this.shoppingIngredients;
     }
 
-    public void setIngredientsInShoppingList(List<Ingredient> ingredients) {
+    public void setIngredientsInShoppingList(List<ShoppingListIngredient> ingredients) {
         this.shoppingIngredients = ingredients;
     }
 }
