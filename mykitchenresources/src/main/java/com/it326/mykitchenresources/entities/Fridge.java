@@ -26,6 +26,9 @@ public class Fridge {
     private Account account;
 
     // Association table for the list of ingredients in the fridge.
+    // We don't need a separate class for this association table
+    // as we don't need to store any additional information as 
+    // opposed to the shopping list.
     @ManyToMany
     @JoinTable(
         name = "fridge_ingredients",

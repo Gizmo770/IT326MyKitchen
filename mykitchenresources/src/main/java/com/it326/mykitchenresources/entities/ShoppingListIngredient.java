@@ -16,6 +16,9 @@ public class ShoppingListIngredient {
     @JoinColumn(name = "shopping_list_id")
     private ShoppingList shoppingList;
 
+
+    // This class contains an ingredient and a prirority 
+    // for that ingredient, somewhat of an "extends" relationship.
     @Id
     @ManyToOne
     @JoinColumn(name = "ingredient_id")

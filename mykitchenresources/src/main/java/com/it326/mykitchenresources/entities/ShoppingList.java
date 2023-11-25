@@ -25,6 +25,8 @@ public class ShoppingList {
     private Account account;
 
     // Association table for the list of ingredients in the shopping list.
+    // In other words, a list of ShoppingListIngredient objects specifice
+    // to represent the ingredients in the shopping list.
     @OneToMany(mappedBy = "shoppingList")
     private List<ShoppingListIngredient> shoppingIngredients;
 
