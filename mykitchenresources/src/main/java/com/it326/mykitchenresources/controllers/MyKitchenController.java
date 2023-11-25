@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,7 +51,7 @@ public class MyKitchenController {
     @DeleteMapping("/account/delete")
     @ResponseBody
     public ResponseEntity<String> deleteAccount(
-        @PathVariable Integer accountId) {
+        @RequestParam Integer accountId) {
         return accountController.deleteAccount(accountId);
     }
 
@@ -63,7 +62,7 @@ public class MyKitchenController {
     @PostMapping("/shopping-list/create")
     @ResponseBody
     public ResponseEntity<String> createShoppingList(
-        @PathVariable Integer currentAccId) {
+        @RequestParam Integer currentAccId) {
         return shoppingListController.createShoppingList(currentAccId);
     }
 
@@ -79,7 +78,7 @@ public class MyKitchenController {
     @PostMapping("/fridge/create")
     @ResponseBody
     public ResponseEntity<String> createFridge(
-        @PathVariable Integer currentAccId) {
+        @RequestParam Integer currentAccId) {
         return fridgeController.createFridge(currentAccId);
     }
 
@@ -100,11 +99,10 @@ public class MyKitchenController {
     /* --------------------------
     Recipe Controller Functions
     --------------------------- */
-    // TODO: Test and debug this function when Fridge with Ingredients are implemented
     @RequestMapping("/recipe/fridge/search")
     @ResponseBody
     public RecipeDetails[] searchRecipesByFridge(
-        @PathVariable Integer currentAccId) {
+        @RequestParam Integer currentAccId) {
         return recipeController.searchRecipesByFridge(currentAccId);
     }
 
