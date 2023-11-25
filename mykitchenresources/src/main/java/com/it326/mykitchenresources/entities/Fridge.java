@@ -1,6 +1,6 @@
 package com.it326.mykitchenresources.entities;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,12 +32,12 @@ public class Fridge {
         joinColumns = @JoinColumn(name = "fridge_id"),
         inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<Ingredient> ingredientsInFridge;
+    private ArrayList<Ingredient> ingredientsInFridge;
 
     public Fridge() {
     }
 
-    public Fridge(Account account, List<Ingredient> ingredients) {
+    public Fridge(Account account, ArrayList<Ingredient> ingredients) {
         this.account = account;
         this.ingredientsInFridge = ingredients;
     }
@@ -50,11 +50,15 @@ public class Fridge {
         this.account = account;
     }
 
-    public List<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredientsInFridge;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredientsInFridge = ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredientsInFridge.add(ingredient);
     }
 }

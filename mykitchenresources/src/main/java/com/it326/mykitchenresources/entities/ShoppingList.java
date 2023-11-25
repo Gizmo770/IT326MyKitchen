@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "shopping_list")
@@ -32,13 +32,13 @@ public class ShoppingList {
         joinColumns = @JoinColumn(name = "list_id"),
         inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<Ingredient> ingredientsInList;
+    private ArrayList<Ingredient> ingredientsInList;
 
 
     public ShoppingList() {
     }
 
-    public ShoppingList(Account account, List<Ingredient> ingredients) {
+    public ShoppingList(Account account, ArrayList<Ingredient> ingredients) {
         this.account = account;
         this.ingredientsInList = ingredients;
     }
@@ -51,11 +51,11 @@ public class ShoppingList {
         this.account = account;
     }
 
-    public List<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredientsInList;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredientsInList = ingredients;
     }
 }

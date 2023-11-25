@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.services.FridgeService;
 
 @RestController
@@ -19,12 +18,12 @@ public class FridgeController {
         return "Hello, world!";
     }
 
-    public ResponseEntity<String> createFridge(Account account) {
+    public ResponseEntity<String> createFridge(Integer accountId) {
         System.out.println("Creating fridge...");
 
         // Create the fridge
         try {
-            fridgeService.createFridge(account);
+            fridgeService.createFridge(accountId);
             return ResponseEntity.ok().body("Fridge created successfully");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating fridge");

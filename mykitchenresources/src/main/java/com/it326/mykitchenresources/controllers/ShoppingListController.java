@@ -22,12 +22,12 @@ public class ShoppingListController {
         return "Hello, list!";
     }
 
-    public ResponseEntity<String> createShoppingList(Account account) {
+    public ResponseEntity<String> createShoppingList(Integer accountId) {
         System.out.println("Creating shopping list...");
 
         // Create the shopping list
         try {
-            shoppingListService.createShoppingList(account, new ArrayList<Ingredient>());
+            shoppingListService.createShoppingList(accountId, new ArrayList<Ingredient>());
             return ResponseEntity.ok().body("Shopping list created successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating shopping list");

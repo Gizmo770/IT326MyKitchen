@@ -52,9 +52,13 @@ public class MyKitchenController {
     ----------------------------------- */
     @PostMapping("/shopping-list/create")
     @ResponseBody
-    public ResponseEntity<String> createShoppingList(Account currentAccount) {
-        return shoppingListController.createShoppingList(currentAccount);
+    public ResponseEntity<String> createShoppingList(Integer currentAccId) {
+        return shoppingListController.createShoppingList(currentAccId);
     }
+
+    //TODO: Method for adding ingredient to shopping list
+
+    //TODO: Method for removing ingredient from shopping list
 
 
     /* --------------------------
@@ -62,14 +66,19 @@ public class MyKitchenController {
     --------------------------- */
     @PostMapping("/fridge/create")
     @ResponseBody
-    public ResponseEntity<String> createFridge(Account currentAccount) {
-        return fridgeController.createFridge(currentAccount);
+    public ResponseEntity<String> createFridge(Integer currentAccId) {
+        return fridgeController.createFridge(currentAccId);
     }
+
+    //TODO: Method for adding ingredient to fridge
+
+    //TODO: Method for removing ingredient from fridge
 
 
     /* --------------------------
     Recipe Controller Functions
     --------------------------- */
+    // TODO: Test and debug this function when Fridge with Ingredients are implemented
     @RequestMapping("/recipe/fridge/search")
     @ResponseBody
     public RecipeDetails[] searchRecipesByFridge(Account currentAccount) {
