@@ -7,8 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -28,7 +26,9 @@ public class ShoppingList {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    // Association table, doesn't exist as a class.
+    // Association class for association table and its priority for each item in the list.
+        // In short, ShoppingListItems manages a list of ingredients 
+        // and their priority in the SQL table.
     @OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShoppingListItems> ingredientsInList = new ArrayList<>();
 
