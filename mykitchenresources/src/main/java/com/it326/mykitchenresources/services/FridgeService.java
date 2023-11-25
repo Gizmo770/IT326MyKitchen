@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.it326.mykitchenresources.dbs.AccountDb;
 import com.it326.mykitchenresources.dbs.FridgeDb;
 import com.it326.mykitchenresources.entities.Fridge;
 import com.it326.mykitchenresources.entities.Ingredient;
@@ -17,11 +16,12 @@ public class FridgeService {
     private FridgeDb fridgeDb;
 
     @Autowired 
-    private AccountDb accountDb;
+    private AccountService accountService;
 
     public void createFridge(Integer accountId) {
+
         Fridge newFridge = new Fridge();
-        newFridge.setAccount(accountDb.findByAccountId(accountId));
+        newFridge.setAccount(accountService.findByAccountId(accountId));
         newFridge.setIngredients(new ArrayList<Ingredient>());
 
         fridgeDb.save(newFridge);

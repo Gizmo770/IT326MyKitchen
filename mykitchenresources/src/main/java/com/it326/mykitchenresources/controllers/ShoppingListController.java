@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.it326.mykitchenresources.services.ShoppingListService;
-import java.util.ArrayList;
 
 @RestController
 public class ShoppingListController {

@@ -25,21 +25,21 @@ public class Fridge {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    // Association table, doesn't exist as a class.
+    // Association table for the list of ingredients in the fridge.
     @ManyToMany
     @JoinTable(
-        name = "ingredient_fridge",
+        name = "fridge_ingredients",
         joinColumns = @JoinColumn(name = "fridge_id"),
         inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<Ingredient> ingredientsInFridge;
+    private List<Ingredient> fridgeIngredients;
 
     public Fridge() {
     }
 
     public Fridge(Account account, List<Ingredient> ingredients) {
         this.account = account;
-        this.ingredientsInFridge = ingredients;
+        this.fridgeIngredients = ingredients;
     }
 
     public Account getAccount() {
@@ -51,14 +51,14 @@ public class Fridge {
     }
 
     public List<Ingredient> getIngredients() {
-        return ingredientsInFridge;
+        return fridgeIngredients;
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredientsInFridge = ingredients;
+        this.fridgeIngredients = ingredients;
     }
 
     public void addIngredient(Ingredient ingredient) {
-        this.ingredientsInFridge.add(ingredient);
+        this.fridgeIngredients.add(ingredient);
     }
 }
