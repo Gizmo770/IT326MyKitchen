@@ -3,6 +3,7 @@ package com.it326.mykitchenresources.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,24 +31,44 @@ public class MyKitchenController {
         return "Hello, kitchen!";
     }
 
+    /* ----------------------------
+    Account Controller Functions
+    ----------------------------- */
     @PostMapping("/account/create")
     @ResponseBody
 	public ResponseEntity<String> createAccount(String name, String username, String password) {
 		return accountController.createAccount(name, username, password);
 	}
 
+    @DeleteMapping("/account/delete")
+    @ResponseBody
+    public ResponseEntity<String> deleteAccount(Integer accountId) {
+        return accountController.deleteAccount(accountId);
+    }
+
+    /* ----------------------------------
+    Shopping List Controller Functions
+    ----------------------------------- */
     @PostMapping("/shopping-list/create")
     @ResponseBody
     public ResponseEntity<String> createShoppingList(Account currentAccount) {
         return shoppingListController.createShoppingList(currentAccount);
     }
 
+
+    /* --------------------------
+    Fridge Controller Functions
+    --------------------------- */
     @PostMapping("/fridge/create")
     @ResponseBody
     public ResponseEntity<String> createFridge(Account currentAccount) {
         return fridgeController.createFridge(currentAccount);
     }
 
+
+    /* --------------------------
+    Recipe Controller Functions
+    --------------------------- */
     @RequestMapping("/recipe/search")
     @ResponseBody
     public String searchRecipesByFridge(Account currentAccount) {

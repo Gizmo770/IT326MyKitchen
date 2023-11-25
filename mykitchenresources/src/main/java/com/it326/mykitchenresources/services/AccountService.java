@@ -21,6 +21,11 @@ public class AccountService {
         return accountDb.save(account);
     }
 
+    public void deleteById(Integer accountId) {
+        accountDb.deleteById(accountId);
+    }
+
+    // Helper function to hash passwords.
     private String hashPassword(String password) {
         // Generate a salt and hash the password using BCrypt
         String salt = BCrypt.gensalt();

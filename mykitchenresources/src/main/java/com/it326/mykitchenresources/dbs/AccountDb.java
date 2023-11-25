@@ -8,4 +8,6 @@ import com.it326.mykitchenresources.entities.Account;
 @Repository
 public interface AccountDb extends JpaRepository<Account, Integer> {
     Account findByUsername(String username);
+
+    void deleteById(Integer accountId);
 }
