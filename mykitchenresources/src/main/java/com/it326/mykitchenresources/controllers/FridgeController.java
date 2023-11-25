@@ -1,8 +1,13 @@
 package com.it326.mykitchenresources.controllers;
 
+import java.util.Date;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.it326.mykitchenresources.services.FridgeService;
@@ -18,7 +23,8 @@ public class FridgeController {
         return "Hello, world!";
     }
 
-    public ResponseEntity<String> createFridge(Integer accountId) {
+    public ResponseEntity<String> createFridge(
+        @PathVariable Integer accountId) {
         System.out.println("Creating fridge...");
 
         // Create the fridge
@@ -27,6 +33,22 @@ public class FridgeController {
             return ResponseEntity.ok().body("Fridge created successfully");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating fridge");
+        }
+    }
+
+    public ResponseEntity<String> addIngredientToFridge(
+        @RequestParam Integer accountId,
+        @RequestParam String ingName,
+        @RequestParam(required = false) Optional<Double> ingQuantity,
+        @RequestParam(required = false) Optional<String> ingExpDate) {
+        System.out.println("Adding ingredient to fridge...");
+
+        // Add the ingredient to the fridge
+        try {
+            fridgeService.addIngredientToFridge(accountId, ingName, ingQuantity, ingExpDate);
+            return ResponseEntity.ok().body("Ingredient added to fridge successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error adding ingredient to fridge");
         }
     }
 }

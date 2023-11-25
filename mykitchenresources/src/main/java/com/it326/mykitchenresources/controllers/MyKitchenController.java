@@ -1,5 +1,8 @@
 package com.it326.mykitchenresources.controllers;
 
+import java.util.Date;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -72,6 +75,14 @@ public class MyKitchenController {
     @ResponseBody
     public ResponseEntity<String> createFridge(Integer currentAccId) {
         return fridgeController.createFridge(currentAccId);
+    }
+
+    // Works
+    @PostMapping("/fridge/add-ingredient")
+    @ResponseBody
+    public ResponseEntity<String> addIngredientToFridge(Integer currentAccId, 
+        String ingName, Optional<Double> ingQuantity, Optional<String> ingExpDate) {
+        return fridgeController.addIngredientToFridge(currentAccId, ingName, ingQuantity, ingExpDate);
     }
 
     //TODO: Method for adding ingredient to fridge
