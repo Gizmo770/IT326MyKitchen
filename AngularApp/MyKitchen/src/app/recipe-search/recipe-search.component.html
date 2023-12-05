@@ -1,0 +1,11 @@
+<h2>Recipe Search</h2>
+
+<!-- Search Recipes Form -->
+<div class="p-grid">
+    <div class="p-col-6">
+        <p-inputText placeholder="Search Recipes" [(ngModel)]="searchTerm"></p-inputText>
+    </div>
+    <div class="p-col-2">
+        <p-button label="Search Recipes" icon="pi pi-search" (click)="searchRecipes()"></p-button>
+    </div>
+</div>
