@@ -19,17 +19,21 @@
             </ul>
 
             <!-- Update Fridge Form -->
-            <div class="p-grid">
-                <div class="p-col-4">
-                    <p-inputText placeholder="Updated Fridge Name" [(ngModel)]="updatedFridgeName"></p-inputText>
-                </div>
-                <div class="p-col-4">
-                    <p-inputText placeholder="Updated Ingredients" [(ngModel)]="updatedIngredients"></p-inputText>
-                </div>
-                <div class="p-col-4">
-                    <p-button label="Update Fridge" icon="pi pi-pencil" (click)="updateFridge(fridge)"></p-button>
+            <div *ngIf="fridge">
+                <div class="p-grid">
+                    <div class="p-col-4">
+                        <p-inputText placeholder="Updated Fridge Name" [(ngModel)]="updatedFridgeName"></p-inputText>
+                    </div>
+                    <div class="p-col-4">
+                        <p-inputText placeholder="Updated Ingredients" [(ngModel)]="updatedIngredients"></p-inputText>
+                    </div>
+                    <div class="p-col-4">
+                        <p-button label="Update Fridge" icon="pi pi-pencil" (click)="updateFridge(fridge)"></p-button>
+                    </div>
+
                 </div>
             </div>
+
 
             <!-- Delete Fridge Button -->
             <p-button label="Delete Fridge" icon="pi pi-trash" (click)="deleteFridge(fridge)"></p-button>

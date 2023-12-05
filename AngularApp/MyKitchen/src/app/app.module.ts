@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardModule } from 'primeng/card';
-
+import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     // Angular Modules
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
