@@ -5,14 +5,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 public class MyKitchenController {
 
@@ -53,6 +56,14 @@ public class MyKitchenController {
     public ResponseEntity<String> deleteAccount(
         @RequestParam Integer accountId) {
         return accountController.deleteAccount(accountId);
+    }
+
+    @PostMapping("/account/login")
+    @ResponseBody
+    public ResponseEntity<Account> login(
+        @RequestParam String username, 
+        @RequestParam String password) {
+        return accountController.login(username, password);
     }
 
     /* ----------------------------------

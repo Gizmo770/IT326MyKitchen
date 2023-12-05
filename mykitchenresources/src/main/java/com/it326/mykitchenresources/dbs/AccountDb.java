@@ -10,5 +10,7 @@ public interface AccountDb extends JpaRepository<Account, Integer> {
     
     public Account findByAccountId(int accountId);
 
-    void deleteById(Integer accountId);
+    public Account findByUsername(String userName);
+
+    public void deleteById(Integer accountId);
 }

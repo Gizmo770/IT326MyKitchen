@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.services.AccountService;
 
 @RestController
@@ -38,6 +39,17 @@ public class AccountController {
             return ResponseEntity.ok("Account deleted successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting account");
+        }
+    }
+
+    public ResponseEntity<Account> login(String username, String password) {
+        System.out.println("Logging in...");
+
+        try {
+            Account account = accountService.login(username, password);
+            return ResponseEntity.ok(account);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 @Entity
@@ -25,10 +26,10 @@ public class Account {
     @Column(name = "hashed_password", length = 60, columnDefinition = "CHAR(60) BINARY")
     private String hashedPassword;    
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ShoppingList shoppingList;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Fridge fridge;
     
     // Constructors, getters, setters, etc.

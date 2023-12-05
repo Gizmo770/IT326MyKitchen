@@ -1,0 +1,14 @@
+<h1>Recipe Search</h1>>
+
+<!-- Search Field and Button  -->
+<input pInputText [(ngModel)]="searchString" name="searchString" placeholder="Search recipes...">
+<p-button label="Search" (click)="searchRecipeByString(searchString)"></p-button>
+
+
+<!-- Display -->
+<div *ngFor="let recipe of recipes">
+  <h2>{{recipe.label}}</h2>
+  <img [src]="recipe.image" alt="{{recipe.label}}">
+  <p>Calories: {{recipe.calories}}</p>
+  <p>Link: {{recipe.url}}</p>
+</div>

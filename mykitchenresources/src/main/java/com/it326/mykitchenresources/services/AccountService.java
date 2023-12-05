@@ -25,6 +25,14 @@ public class AccountService {
         accountDb.deleteById(accountId);
     }
 
+    public Account login(String username, String password) {
+        Account account = accountDb.findByUsername(username);
+        if (account != null && BCrypt.checkpw(password, account.getHashedPassword())) {
+            return account;
+        }
+        return null;
+    }
+
     public Account findByAccountId(Integer accountId) {
         return accountDb.findByAccountId(accountId);
     }
