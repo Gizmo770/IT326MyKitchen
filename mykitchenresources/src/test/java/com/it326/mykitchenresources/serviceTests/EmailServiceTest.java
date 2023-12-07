@@ -53,10 +53,10 @@ public class EmailServiceTest {
         account.setPhoneCarrier("AT&T");
     }
 
+    //A test that verifies that the email sends
+    //when the fridge has expired ingredients
     @Test
     public void testNotifyOfExpiredIngredients() {
-        // Mock data
-
         Fridge fridge = new Fridge();
         fridge.setIngredients(new ArrayList<>());
 
