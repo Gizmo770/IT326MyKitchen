@@ -24,7 +24,16 @@ public class Account {
     private String username;
 
     @Column(name = "hashed_password", length = 60, columnDefinition = "CHAR(60) BINARY")
-    private String hashedPassword;    
+    private String hashedPassword;
+    
+    @Column(name = "email", length = 45)
+    private String email;
+
+    @Column(name = "phone_number", length = 45)
+    private String phoneNumber;
+
+    @Column(name = "carrier", length = 45)
+    private String phoneCarrier;
 
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ShoppingList shoppingList;
@@ -77,5 +86,23 @@ public class Account {
     }
     public void setFridge(Fridge fridge) {
         this.fridge = fridge;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(String phone_number) {
+        this.phoneNumber = phone_number;
+    }
+    public String getPhoneCarrier() {
+        return phoneCarrier;
+    }
+    public void setPhoneCarrier(String phoneCarrier) {
+        this.phoneCarrier = phoneCarrier;
     }
 }

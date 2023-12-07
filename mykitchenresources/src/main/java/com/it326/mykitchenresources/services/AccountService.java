@@ -1,5 +1,7 @@
 package com.it326.mykitchenresources.services;
 
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +15,12 @@ public class AccountService {
     @Autowired
     private AccountDb accountDb;
 
-    public Account createAccount(String name, String username, String password) {
+    public void createAccount(String name, String username, String password) {
         Account account = new Account();
         account.setName(name);
         account.setUserName(username);
         account.setHashedPassword(hashPassword(password));
-        return accountDb.save(account);
+        accountDb.save(account);
     }
 
     public void deleteById(Integer accountId) {
@@ -35,6 +37,10 @@ public class AccountService {
 
     public Account findByAccountId(Integer accountId) {
         return accountDb.findByAccountId(accountId);
+    }
+
+    public List<Account> findAll() {
+        return accountDb.findAll();
     }
 
     // Helper function to hash passwords.
