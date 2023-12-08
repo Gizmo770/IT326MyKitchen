@@ -35,6 +35,9 @@ public class Account {
     @Column(name = "carrier", length = 45)
     private String phoneCarrier;
 
+    @Column(name = "ingredient_low_threshold")
+    private double ingredientLowThreshold;
+
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ShoppingList shoppingList;
 
@@ -104,5 +107,11 @@ public class Account {
     }
     public void setPhoneCarrier(String phoneCarrier) {
         this.phoneCarrier = phoneCarrier;
+    }
+    public void setLowIngredientThreshold(double ingredientLowThreshold) {
+        this.ingredientLowThreshold = ingredientLowThreshold;
+    }
+    public double getLowIngredientThreshold() {
+        return ingredientLowThreshold;
     }
 }

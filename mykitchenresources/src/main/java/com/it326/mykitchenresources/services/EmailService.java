@@ -29,6 +29,9 @@ public class EmailService {
     @Autowired 
     private AccountService accountService;
 
+    @Autowired
+    private ShoppingListService shoppingListService;
+
     @Value("${spring.mail.username}")
     private String fromEmail;
 
@@ -53,19 +56,49 @@ public class EmailService {
                 String phoneNumber = account.getPhoneNumber();
                 String email = account.getEmail();
                 if(email != null) {
-                    SimpleMailMessage message = buildMessage(expIngredients, email);
+                    SimpleMailMessage message = buildExpiringMessage(expIngredients, email);
                     emailSender.send(message);
                 }
                 if(phoneNumber != null) {
                     phoneNumber = phoneNumber + phoneCarrierToEmail(account.getPhoneCarrier());
-                    SimpleMailMessage message = buildMessage(expIngredients, phoneNumber);
+                    SimpleMailMessage message = buildExpiringMessage(expIngredients, phoneNumber);
                     emailSender.send(message);
                 }
             }
         }               
     }
 
-    private SimpleMailMessage buildMessage(List<Ingredient> expIngredients, String sendTo) {
+    @Scheduled(cron = "0 0 12 * * ?")
+    public void notifyOfLowIngredients() {
+            
+            for (Account account : accountService.findAll()) {
+                List<Ingredient> lowIngredientsList = new ArrayList<Ingredient>();
+                Fridge fridge = fridgeService.getFridgeByAccountId(account.getAccountId());
+                for (Ingredient ingredient : fridge.getIngredients()) {
+                    if (ingredient != null && !Double.isNaN(ingredient.getQuantity())) {
+                        if(ingredient.getQuantity() <= account.getLowIngredientThreshold()) {
+                            lowIngredientsList.add(ingredient);
+                        }
+                    }
+                }
+                
+                if (!lowIngredientsList.isEmpty()) {
+                    String phoneNumber = account.getPhoneNumber();
+                    String email = account.getEmail();
+                    if(email != null) {
+                        SimpleMailMessage message = buildLowIngredientMessage(lowIngredientsList, email);
+                        emailSender.send(message);
+                    }
+                    if(phoneNumber != null) {
+                        phoneNumber = phoneNumber + phoneCarrierToEmail(account.getPhoneCarrier());
+                        SimpleMailMessage message = buildLowIngredientMessage(lowIngredientsList, phoneNumber);
+                        emailSender.send(message);
+                    }
+                }
+            }
+    }
+
+    private SimpleMailMessage buildExpiringMessage(List<Ingredient> expIngredients, String sendTo) {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);
@@ -75,6 +108,22 @@ public class EmailService {
         String body = "The following ingredients are expiring soon: \n";
         for (Ingredient ingredient : expIngredients) {
             body += ingredient.getName() + " " + ingredient.getExpirationDate().toString() + "\n";
+        }
+        message.setText(body);
+
+        return message;
+    }
+
+    private SimpleMailMessage buildLowIngredientMessage(List<Ingredient> lowIngredients, String sendTo) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(sendTo);
+        message.setSubject("myKitchen: Your ingredients are running low!");
+
+        String body = "The following ingredients are running low: \n";
+        for (Ingredient ingredient : lowIngredients) {
+            body += ingredient.getName() + " " + ingredient.getQuantity() + "\n";
         }
         message.setText(body);
 

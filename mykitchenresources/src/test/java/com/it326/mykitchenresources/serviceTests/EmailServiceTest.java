@@ -37,6 +37,7 @@ public class EmailServiceTest {
     @Mock
     private JavaMailSender emailSender;
 
+    @Mock
     private Account account;
 
     @InjectMocks
@@ -51,6 +52,7 @@ public class EmailServiceTest {
         account.setEmail("test@example.com");
         account.setPhoneNumber("1234567890");
         account.setPhoneCarrier("AT&T");
+        account.setLowIngredientThreshold(1);
     }
 
     //A test that verifies that the email sends
@@ -75,6 +77,29 @@ public class EmailServiceTest {
         emailService.notifyOfExpiredIngredients();
 
         // Verify the email sender
+        verify(emailSender, times(2)).send(any(SimpleMailMessage.class));
+    }
+
+    @Test
+    public void testNotifyOfLowIngredients() {
+        Fridge fridge = new Fridge();
+        fridge.setIngredients(new ArrayList<>());
+
+        Ingredient ingredient1 = new Ingredient();
+        ingredient1.setQuantity(1);
+        fridge.getIngredients().add(ingredient1);
+
+        Ingredient ingredient2 = new Ingredient();
+        ingredient2.setQuantity(1);
+        fridge.getIngredients().add(ingredient2);
+
+        when(accountService.findAll()).thenReturn(Collections.singletonList(account));
+        when(fridgeService.getFridgeByAccountId(account.getAccountId())).thenReturn(fridge);
+
+        // Call the method
+        emailService.notifyOfLowIngredients();
+
+        // Verify the email sender to send to text and email
         verify(emailSender, times(2)).send(any(SimpleMailMessage.class));
     }
 
