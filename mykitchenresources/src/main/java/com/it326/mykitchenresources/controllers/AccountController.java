@@ -52,4 +52,24 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    public ResponseEntity<Account> updateAccount(Integer accountId, String name, String username, 
+    String password, String email, String phoneNumber, String phoneCarrier, Double lowIngredientThreshold) {
+        System.out.println("Updating account...");
+
+        try {
+            Account account = accountService.updateAccount(
+                accountId, 
+                name, 
+                username, 
+                password,
+                email,
+                phoneNumber,
+                phoneCarrier,
+                lowIngredientThreshold);
+            return ResponseEntity.ok(account);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }

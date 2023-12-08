@@ -15,6 +15,10 @@ public class AccountService {
     @Autowired
     private AccountDb accountDb;
 
+    public AccountService(AccountDb accountDb) {
+        this.accountDb = accountDb;
+    }
+
     public void createAccount(String name, String username, String password) {
         Account account = new Account();
         account.setName(name);
@@ -39,12 +43,44 @@ public class AccountService {
         return accountDb.findByAccountId(accountId);
     }
 
+    public Account updateAccount(Integer accountId, String name, String username,
+    String password, String email, String phoneNumber, String phoneCarrier,
+    Double ingredientLowThreshold) {
+        Account account = accountDb.findByAccountId(accountId);
+        if (account != null) {
+            if(name != null) {
+                account.setName(name);
+            }
+            if(username != null) {
+                account.setUserName(username);
+            }
+            if(password != null) {
+                account.setHashedPassword(hashPassword(password));
+            }
+            if(email != null) {
+                account.setEmail(email);
+            }
+            if(phoneNumber != null) {
+                account.setPhoneNumber(phoneNumber);
+            }
+            if(phoneCarrier != null) {
+                account.setPhoneCarrier(phoneCarrier);
+            }
+            if(ingredientLowThreshold != null) {
+                account.setLowIngredientThreshold(ingredientLowThreshold);
+            }
+            accountDb.save(account);
+        }
+
+        return account;
+    }
+
     public List<Account> findAll() {
         return accountDb.findAll();
     }
 
     // Helper function to hash passwords.
-    private String hashPassword(String password) {
+    public String hashPassword(String password) {
         // Generate a salt and hash the password using BCrypt
         String salt = BCrypt.gensalt();
         return BCrypt.hashpw(password, salt);
