@@ -31,6 +31,8 @@ public class MyKitchenController {
     @Autowired
     private FridgeController fridgeController;
 
+    @Autowired NotificationController notificationController;
+
     @RequestMapping("/hello-kitchen")
     @ResponseBody
     public String helloKitchen() {
@@ -64,6 +66,20 @@ public class MyKitchenController {
         @RequestParam String username, 
         @RequestParam String password) {
         return accountController.login(username, password);
+    }
+
+    @PostMapping("/account/update")
+    @ResponseBody
+    public ResponseEntity<Account> updateAccount(
+        @RequestParam Integer accountId,
+        @RequestParam(required = false) Optional<String> name,
+        @RequestParam(required = false) Optional<String> username,
+        @RequestParam(required = false) Optional<String> password,
+        @RequestParam(required = false) Optional<String> email,
+        @RequestParam(required = false) Optional<String> phoneNumber,
+        @RequestParam(required = false) Optional<String> phoneCarrier,
+        @RequestParam(required = false) Optional<Double> ingredientLowThreshold) {
+        return accountController.updateAccount(accountId, name, username, password, email, phoneNumber, phoneCarrier, ingredientLowThreshold);
     }
 
     /* ----------------------------------
@@ -123,5 +139,25 @@ public class MyKitchenController {
     public RecipeDetails[] searchRecipesByString(
         @RequestParam String ingredients) {
         return recipeController.searchRecipesByString(ingredients);
+    }
+
+    /* ----------------------------------
+    Email And Notify Controller Functions
+    ----------------------------------- */
+    @PostMapping("/share-list/email")
+    @ResponseBody
+    public ResponseEntity<String> emailShoppingList(
+        @RequestParam Integer currentAccId,
+        @RequestParam String emailToSendTo) {
+        return notificationController.emailShoppingList(currentAccId, emailToSendTo);
+    }
+
+    @PostMapping("/share-list/text")
+    @ResponseBody
+    public ResponseEntity<String> textShoppingList(
+        @RequestParam Integer currentAccId,
+        @RequestParam String phoneNumberToSendTo,
+        @RequestParam String recipientPhoneCarrier) {
+        return notificationController.textShoppingList(currentAccId, phoneNumberToSendTo, recipientPhoneCarrier);
     }
 }

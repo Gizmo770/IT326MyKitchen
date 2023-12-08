@@ -98,6 +98,32 @@ public class EmailService {
             }
     }
 
+    public void emailShoppingList(Integer accountId, String emailToSendTo) {
+
+        Account account = accountService.findByAccountId(accountId);
+        List<Ingredient> shoppingList = shoppingListService.getIngredientsInShoppingList(accountId);
+
+        SimpleMailMessage message = buildShoppingListMessage(account.getName(), shoppingList, emailToSendTo);
+        emailSender.send(message);
+    }
+
+    public SimpleMailMessage textShoppingList(Integer accountId, String phoneNumberToSendTo, String recipientPhoneCarrier) {
+
+        Account account = accountService.findByAccountId(accountId);
+        List<Ingredient> shoppingList = shoppingListService.getIngredientsInShoppingList(accountId);
+
+        String phoneNumber = phoneNumberToSendTo + phoneCarrierToEmail(recipientPhoneCarrier);
+        SimpleMailMessage message = buildShoppingListMessage(account.getName(), shoppingList, phoneNumber);
+        emailSender.send(message);
+
+        return message;
+    }
+
+
+    /* ----------------------------------
+     * Message Builder and Helper Methods
+     * ---------------------------------- */
+
     private SimpleMailMessage buildExpiringMessage(List<Ingredient> expIngredients, String sendTo) {
 
         SimpleMailMessage message = new SimpleMailMessage();
@@ -124,6 +150,22 @@ public class EmailService {
         String body = "The following ingredients are running low: \n";
         for (Ingredient ingredient : lowIngredients) {
             body += ingredient.getName() + " " + ingredient.getQuantity() + "\n";
+        }
+        message.setText(body);
+
+        return message;
+    }
+
+    private SimpleMailMessage buildShoppingListMessage(String name, List<Ingredient> shoppingList, String sendTo) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(sendTo);
+        message.setSubject("myKitchen: " + name + "'s shopping list");
+
+        String body = "Hello " + name + ",\n\nHere is " + name + "'s shopping list: \n\n";
+        for (Ingredient ingredient : shoppingList) {
+            body += ingredient.getName() + "\n";
         }
         message.setText(body);
 
@@ -167,7 +209,7 @@ public class EmailService {
             case "Xfinity Mobile":
                 return "@vtext.com";
             default:
-                return "";
+                return null;
         }
     }
 }

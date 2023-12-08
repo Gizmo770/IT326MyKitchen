@@ -26,4 +26,8 @@ public class ShoppingListIngredient {
 
     @Column(name = "priority")
     private int priority;
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
 }
