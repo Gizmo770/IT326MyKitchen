@@ -16,7 +16,7 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ingredient_id")
-    private Long ingredientId;
+    private Integer ingredientId;
 
     @Column(name = "name", length = 45)
     private String name;
@@ -39,6 +39,14 @@ public class Ingredient {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getId() {
+        return ingredientId;
+    }
+
+    public void setId(Integer id) {
+        ingredientId = id;
     }
 
     public void setName(String name) {
