@@ -88,24 +88,16 @@ public class MyKitchenController {
     ----------------------------------- */
     // Works
     @PostMapping("/shopping-list/create")
-    public ResponseEntity<String> createShoppingList(@RequestParam Integer accountId) {
-        return shoppingListController.createShoppingList(accountId);
+    @ResponseBody
+    public ResponseEntity<String> createShoppingList(
+        @RequestParam Integer currentAccId) {
+        return shoppingListController.createShoppingList(currentAccId);
     }
 
-    @PostMapping("/shopping-list/add-ingredient")
-    public ResponseEntity<String> addIngredientToShoppingList(
-        @RequestParam Integer shoppingListId,
-        @RequestParam String ingredientName,
-        @RequestParam(required = false) Optional<Double> quantity) {
-        return shoppingListController.addIngredientToShoppingList(shoppingListId, ingredientName, quantity);
-    }
+    //TODO: Method for adding ingredient to shopping list
 
-    @DeleteMapping("/shopping-list/remove-ingredient")
-    public ResponseEntity<String> removeIngredientFromShoppingList(
-        @RequestParam Integer shoppingListId,
-        @RequestParam Integer ingredientId) {
-        return shoppingListController.removeIngredientFromShoppingList(shoppingListId, ingredientId);
-    }
+    //TODO: Method for removing ingredient from shopping list
+
 
     /* --------------------------
     Fridge Controller Functions

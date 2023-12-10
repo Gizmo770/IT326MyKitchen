@@ -18,13 +18,11 @@ public class ShoppingList {
     @Id
     @Column(name = "shopping_list_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer listId;
+    private Long listId;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
-
-    private Double budget;
 
     // Association table for the list of ingredients in the shopping list.
     // In other words, a list of ShoppingListIngredient objects specifice
@@ -43,27 +41,11 @@ public class ShoppingList {
         this.account = account;
     }
 
-    public Integer getListId() {
-        return listId;
-    }
-
-    public void setListId(Integer listId) {
-        this.listId = listId;
-    }
-
     public List<ShoppingListIngredient> getIngredientsInShoppingList() {
         return this.shoppingIngredients;
     }
 
     public void setIngredientsInShoppingList(List<ShoppingListIngredient> ingredients) {
         this.shoppingIngredients = ingredients;
-    }
-
-    public Double getBudget() {
-        return budget;
-    }
-
-    public void setBudget(Double budget) {
-        this.budget = budget;
     }
 }
