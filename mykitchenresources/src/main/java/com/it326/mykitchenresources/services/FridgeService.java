@@ -61,4 +61,45 @@ public class FridgeService {
     public Fridge getFridgeByAccountId(Integer accountId) {
         return fridgeDb.findByAccount(accountService.findByAccountId(accountId));
     }
+
+    public List<Ingredient> searchIngredient(Integer accountId, String searchQuery) {
+    Fridge fridgeData = getFridgeByAccountId(accountId);
+
+    List<Ingredient> searchResults = new ArrayList<>();
+    for (Ingredient ingredient : fridgeData.getIngredients()) {
+        if (ingredient.getName().toLowerCase().contains(searchQuery.toLowerCase())) {
+            searchResults.add(ingredient);
+        }
+    }
+
+    return searchResults;
+}
+
+public void updateIngredient(Integer accountId, Long ingredientId, String newName, Double newQuantity, String newExpDate) {
+    Fridge fridgeData = getFridgeByAccountId(accountId);
+
+    for (Ingredient ingredient : fridgeData.getIngredients()) {
+        if (ingredient.getId().equals(ingredientId)) {
+            ingredient.setName(newName);
+            ingredient.setQuantity(newQuantity);
+            try {
+                Date convertedDate = new SimpleDateFormat("yyyy-MM-dd").parse(newExpDate);
+                ingredient.setExpirationDate(convertedDate);
+            } catch (ParseException e) {
+                System.out.println("Error converting date");
+            }
+            break;
+        }
+    }
+
+    fridgeDb.save(fridgeData);
+}
+
+public void deleteIngredient(Integer accountId, Long ingredientId) {
+    Fridge fridgeData = getFridgeByAccountId(accountId);
+
+    fridgeData.getIngredients().removeIf(ingredient -> ingredient.getId().equals(ingredientId));
+
+    fridgeDb.save(fridgeData);
+}
 }
