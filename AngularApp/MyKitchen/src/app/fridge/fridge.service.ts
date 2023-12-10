@@ -43,4 +43,33 @@ export class FridgeService {
     private updateFridgesSubject(): void {
         this.fridgesSubject.next([...this.fridges]);
     }
+      addIngredientToFridge(fridgeId: number, ingredient: string): void {
+        const fridge = this.fridges.find((f) => f.id === fridgeId);
+        if (fridge) {
+            fridge.ingredients.push(ingredient);
+            this.updateFridgesSubject();
+        }
+    }
+
+    
+    updateIngredientInFridge(fridgeId: number, oldIngredient: string, newIngredient: string): void {
+        const fridge = this.fridges.find((f) => f.id === fridgeId);
+        if (fridge) {
+            const index = fridge.ingredients.indexOf(oldIngredient);
+            if (index !== -1) {
+                fridge.ingredients[index] = newIngredient;
+                this.updateFridgesSubject();
+            }
+        }
+    }
+
+  
+    deleteIngredientFromFridge(fridgeId: number, ingredient: string): void {
+        const fridge = this.fridges.find((f) => f.id === fridgeId);
+        if (fridge) {
+            fridge.ingredients = fridge.ingredients.filter((i) => i !== ingredient);
+            this.updateFridgesSubject();
+        }
+    }
 }
+
