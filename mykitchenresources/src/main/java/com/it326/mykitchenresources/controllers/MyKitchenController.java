@@ -31,7 +31,8 @@ public class MyKitchenController {
     @Autowired
     private FridgeController fridgeController;
 
-    @Autowired NotificationController notificationController;
+    @Autowired 
+    NotificationController notificationController;
 
     @RequestMapping("/hello-kitchen")
     @ResponseBody
