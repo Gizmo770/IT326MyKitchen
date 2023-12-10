@@ -87,8 +87,13 @@ export class AuthService {
   // }
 
   public createAccount(name: string, username: string, password: string): Observable<boolean> {
-    const body = { name, username, password }; // Use an object for the request body
-    return this.http.post(this.createAccountUrl, body).pipe(
+    const body = {
+      name: name,
+      username: username,
+      password: password
+    }; // Use an object for the request body
+
+    return this.http.post<any>(this.createAccountUrl, body).pipe(
       map(response => response ? true : false),
       catchError(error => {
         console.error('Error creating account:', error);
