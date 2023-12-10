@@ -44,6 +44,9 @@ public class EmailServiceTest {
     @Mock
     private Account account;
 
+    @Mock
+    private Fridge fridge;
+
     @InjectMocks
     private EmailService emailService;
 
@@ -83,6 +86,8 @@ public class EmailServiceTest {
         // Verify the email sender
         verify(emailSender, times(2)).send(any(SimpleMailMessage.class));
     }
+    
+    
 
     @Test
     public void testNotifyOfLowIngredients() {
