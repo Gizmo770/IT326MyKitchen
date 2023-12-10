@@ -37,6 +37,16 @@
 
             <!-- Delete Fridge Button -->
             <p-button label="Delete Fridge" icon="pi pi-trash" (click)="deleteFridge(fridge)"></p-button>
+
+            <!-- Add Ingredient Button -->
+<p-button label="Add Ingredient" icon="pi pi-plus" (click)="addIngredient(fridge)"></p-button>
+
+<!-- Update Ingredient Button -->
+<p-button label="Update Ingredient" icon="pi pi-pencil" (click)="updateIngredient(fridge, ingredient)" *ngFor="let ingredient of fridge.ingredients"></p-button>
+
+<!-- Delete Ingredient Button -->
+<p-button label="Delete Ingredient" icon="pi pi-trash" (click)="deleteIngredient(fridge, ingredient)" *ngFor="let ingredient of fridge.ingredients"></p-button>
+            
         </p-card>
     </div>
 </div>
