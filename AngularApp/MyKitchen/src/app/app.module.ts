@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
 
@@ -36,8 +37,16 @@ export function tokenGetter() {
     // Angular Modules
     BrowserAnimationsModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000', 'localhost:8080']
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
