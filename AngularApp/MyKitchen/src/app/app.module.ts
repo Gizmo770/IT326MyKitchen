@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
 
