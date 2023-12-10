@@ -60,4 +60,12 @@ public class Ingredient {
     public void setExpirationDate(Date date) {
         this.expirationDate = date;
     }
+
+    public Long getIngredientId() {
+        return this.ingredientId;
+    }
+
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
+    }
 }
