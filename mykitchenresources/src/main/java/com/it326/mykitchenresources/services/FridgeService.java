@@ -1,9 +1,11 @@
 package com.it326.mykitchenresources.services;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,7 +77,7 @@ public class FridgeService {
     return searchResults;
 }
 
-public void updateIngredient(Integer accountId, Long ingredientId, String newName, Double newQuantity, String newExpDate) {
+public void updateIngredient(Integer accountId, Integer ingredientId, String newName, Double newQuantity, String newExpDate) {
     Fridge fridgeData = getFridgeByAccountId(accountId);
 
     for (Ingredient ingredient : fridgeData.getIngredients()) {
