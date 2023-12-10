@@ -97,7 +97,7 @@ public void updateIngredient(Integer accountId, Integer ingredientId, String new
     fridgeDb.save(fridgeData);
 }
 
-public void deleteIngredient(Integer accountId, Long ingredientId) {
+public void deleteIngredient(Integer accountId, Integer ingredientId) {
     Fridge fridgeData = getFridgeByAccountId(accountId);
 
     fridgeData.getIngredients().removeIf(ingredient -> ingredient.getId().equals(ingredientId));
