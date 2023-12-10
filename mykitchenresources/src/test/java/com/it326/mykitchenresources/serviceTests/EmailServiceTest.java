@@ -1,6 +1,5 @@
 package com.it326.mykitchenresources.serviceTests;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +16,7 @@ import com.it326.mykitchenresources.entities.Ingredient;
 import com.it326.mykitchenresources.services.AccountService;
 import com.it326.mykitchenresources.services.EmailService;
 import com.it326.mykitchenresources.services.FridgeService;
+import com.it326.mykitchenresources.services.ShoppingListService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -24,6 +24,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class EmailServiceTest {
@@ -35,10 +36,16 @@ public class EmailServiceTest {
     private FridgeService fridgeService;
 
     @Mock
+    private ShoppingListService shoppingListService;
+
+    @Mock
     private JavaMailSender emailSender;
 
     @Mock
     private Account account;
+
+    @Mock
+    private Fridge fridge;
 
     @InjectMocks
     private EmailService emailService;
@@ -79,6 +86,8 @@ public class EmailServiceTest {
         // Verify the email sender
         verify(emailSender, times(2)).send(any(SimpleMailMessage.class));
     }
+    
+    
 
     @Test
     public void testNotifyOfLowIngredients() {
@@ -103,9 +112,49 @@ public class EmailServiceTest {
         verify(emailSender, times(2)).send(any(SimpleMailMessage.class));
     }
 
-    @AfterEach
-    public void tearDown()
-    {
-        
+    @Test
+    public void testEmailShoppingList() {
+        //Arrange
+        Account testAccount = new Account(1, "John Doe", "jdoe", "password");
+        Ingredient testIng = new Ingredient();
+        testIng.setName("TestIng");
+        testIng.setQuantity(1);
+        testIng.setExpirationDate(Calendar.getInstance().getTime());
+        List<Ingredient> testIngredients = new ArrayList<Ingredient>();
+        testIngredients.add(testIng);
+
+        when(accountService.findByAccountId(1)).thenReturn(testAccount);
+        when(shoppingListService.getIngredientsInShoppingList(1))
+            .thenReturn(testIngredients);
+    
+
+        //Act
+        emailService.emailShoppingList(1, "test@example.com");
+
+        //Assert
+        verify(emailSender, times(1)).send(any(SimpleMailMessage.class));
+    }
+
+    @Test
+    public void testTextShoppingList() {
+        //Arrange
+        Account testAccount = new Account(1, "John Doe", "jdoe", "password");
+        Ingredient testIng = new Ingredient();
+        testIng.setName("TestIng");
+        testIng.setQuantity(1);
+        testIng.setExpirationDate(Calendar.getInstance().getTime());
+        List<Ingredient> testIngredients = new ArrayList<Ingredient>();
+        testIngredients.add(testIng);
+
+        when(accountService.findByAccountId(1)).thenReturn(testAccount);
+        when(shoppingListService.getIngredientsInShoppingList(1))
+            .thenReturn(testIngredients);
+    
+
+        //Act
+        emailService.textShoppingList(1, "1234567890", "AT&T");
+
+        //Assert
+        verify(emailSender, times(1)).send(any(SimpleMailMessage.class));
     }
 }

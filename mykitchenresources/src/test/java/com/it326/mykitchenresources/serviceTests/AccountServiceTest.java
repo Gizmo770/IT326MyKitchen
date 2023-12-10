@@ -45,9 +45,13 @@ public class AccountServiceTest {
         // Act
         // Call the method to test
         Account updatedAccount = accountService.updateAccount(
-            1, "Jane Smith", "janedoe", 
-            "newpassword", "janesmith@example.com", 
-            "1234567890", "AT&T", 
+            1, 
+            "Jane Smith", 
+            "janedoe", 
+            "newpassword", 
+            "janesmith@example.com", 
+            "1234567890", 
+            "AT&T", 
             5.0);
 
         // Assert
