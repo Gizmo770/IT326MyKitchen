@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth-guard/auth.guard';
 import { FridgeComponent } from './fridge/fridge.component';
-import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
 
 const routes: Routes = [
   {

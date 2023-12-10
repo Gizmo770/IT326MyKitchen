@@ -43,8 +43,6 @@ public class AccountService {
         return accountDb.findByAccountId(accountId);
     }
 
-    
-
     public Account updateAccount(Integer accountId, String name, String username,
     String password, String email, String phoneNumber, String phoneCarrier,
     Double ingredientLowThreshold) {
@@ -76,7 +74,6 @@ public class AccountService {
 
         return account;
     }
-
 
     public List<Account> findAll() {
         return accountDb.findAll();

@@ -77,11 +77,11 @@ public class FridgeService {
     return searchResults;
 }
 
-public void updateIngredient(Integer accountId, Integer ingredientId, String newName, Double newQuantity, String newExpDate) {
+public void updateIngredient(Integer accountId, Long ingredientId, String newName, Double newQuantity, String newExpDate) {
     Fridge fridgeData = getFridgeByAccountId(accountId);
 
     for (Ingredient ingredient : fridgeData.getIngredients()) {
-        if (ingredient.getId().equals(ingredientId)) {
+        if (ingredient.getIngredientId().equals(ingredientId)) {
             ingredient.setName(newName);
             ingredient.setQuantity(newQuantity);
             try {
@@ -97,10 +97,10 @@ public void updateIngredient(Integer accountId, Integer ingredientId, String new
     fridgeDb.save(fridgeData);
 }
 
-public void deleteIngredient(Integer accountId, Integer ingredientId) {
+public void deleteIngredient(Integer accountId, Long ingredientId) {
     Fridge fridgeData = getFridgeByAccountId(accountId);
 
-    fridgeData.getIngredients().removeIf(ingredient -> ingredient.getId().equals(ingredientId));
+    fridgeData.getIngredients().removeIf(ingredient -> ingredient.getIngredientId().equals(ingredientId));
 
     fridgeDb.save(fridgeData);
 }
