@@ -12,7 +12,7 @@ import { PanelModule } from 'primeng/panel';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FridgeComponent } from './fridge/fridge.component';
-import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
 
