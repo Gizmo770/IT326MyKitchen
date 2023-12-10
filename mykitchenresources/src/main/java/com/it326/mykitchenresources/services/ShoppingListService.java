@@ -20,9 +20,6 @@ public class ShoppingListService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @Autowired
-    private AccountService AccountService;
-
     // Assuming AccountService and AccountRepository are implemented
     @Autowired
     private AccountService accountService;
