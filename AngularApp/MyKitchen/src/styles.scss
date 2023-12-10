@@ -1,21 +1,46 @@
+@import 'primeng/resources/themes/nova/theme.css';
+@import 'primeng/resources/primeng.min.css';
+@import 'primeicons/primeicons.css';
+
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 /* Application-wide Styles */
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
-h2, h3 {
+
+h2,
+h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 body {
   margin: 2em;
 }
-body, input[type="text"], button {
+
+body,
+input[type="text"],
+button {
   color: #333;
   font-family: Cambria, Georgia, serif;
 }
+
 button {
   background-color: #eee;
   border: none;
@@ -28,10 +53,12 @@ button {
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
+
 button:hover {
   background-color: black;
   color: white;
 }
+
 button:disabled {
   background-color: #eee;
   color: #aaa;
