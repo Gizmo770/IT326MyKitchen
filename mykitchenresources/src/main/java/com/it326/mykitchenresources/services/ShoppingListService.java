@@ -74,6 +74,9 @@ public class ShoppingListService {
         shoppingListDb.save(shoppingList); // Save the shopping list
     }
 
+    public List<ShoppingList> findAllShoppingLists() {
+        return shoppingListDb.findAll();
+    }
     public void deleteShoppingListIngredient(Long shoppingListId, Long ingredientId) {
         ShoppingList shoppingList = shoppingListDb.findById(shoppingListId)
             .orElseThrow(() -> new RuntimeException("Shopping list not found"));

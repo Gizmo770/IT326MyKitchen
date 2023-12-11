@@ -7,7 +7,7 @@ import { Ingredient } from '../models/ingredient.model';
   providedIn: 'root'
 })
 export class ShoppingListService {
-  private apiUrl = 'http://your-backend-api/shopping-list'; // Replace with your actual API URL
+  private apiUrl = 'http://localhost:8081/shopping-lists'; 
 
   constructor(private http: HttpClient) {}
 

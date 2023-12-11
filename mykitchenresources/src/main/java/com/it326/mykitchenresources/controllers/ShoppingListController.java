@@ -48,6 +48,7 @@ public class ShoppingListController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding ingredient to shopping list: " + e.getMessage());
         }
     }
+    
 
     @DeleteMapping("/{shoppingListId}/remove-ingredient/{ingredientId}")
     public ResponseEntity<String> removeIngredientFromShoppingList(
