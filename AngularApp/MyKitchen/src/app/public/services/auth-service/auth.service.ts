@@ -55,18 +55,18 @@ export class AuthService {
    The `..of()..` can be removed if you have a real backend, at the moment, this is just a faked response
   */
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return of(fakeLoginResponse).pipe(
-      tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
-      tap(() => this.snackbar.open('Login Successfull', 'Close', {
-        duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-      }))
-    );
-    // return this.http.post<LoginResponse>('http://localhost:8081/account/login', loginRequest).pipe(
+    // return of(fakeLoginResponse).pipe(
     //   tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
     //   tap(() => this.snackbar.open('Login Successfull', 'Close', {
     //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
     //   }))
     // );
+    return this.http.post<LoginResponse>('http://localhost:8081/account/login', loginRequest).pipe(
+      tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
+      tap(() => this.snackbar.open('Login Successfull', 'Close', {
+        duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+      }))
+    );
   }
 
   /*
@@ -74,16 +74,16 @@ export class AuthService {
   */
   register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
     //   // TODO
-    return of(fakeRegisterResponse).pipe(
+    // return of(fakeRegisterResponse).pipe(
+    //   tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
+    //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    //   })),
+    // );
+    return this.http.post<RegisterResponse>('http://localhost:8081/account/create', registerRequest).pipe(
       tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
         duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-      })),
-    );
-    //   return this.http.post<RegisterResponse>('http://localhost:8081/account/create', registerRequest).pipe(
-    //     tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
-    //       duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-    //     }))
-    //   )
+      }))
+    )
   }
 
   public createAccount(name: string, username: string, password: string): Observable<boolean> {
