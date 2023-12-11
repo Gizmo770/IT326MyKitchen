@@ -16,9 +16,9 @@ export class UpdateAccountComponent implements OnInit {
 
   ngOnInit(): void {
       //TESTING PURPOSES ONLY!!! TEST
-      // this.accountService.currentAccount =
-      //   new Account(6, 'TestName', 'TestUsername', 'testpass' +
-      //   'test@example.com', '1234567890', '@txt.att.net', 5);
+      this.accountService.currentAccount =
+        new Account(12, 'Gian Garnica', 'gjgarn1test', 'testpass' +
+        'gjgarn1@ilstu.edu', '8157355994', 'AT&T', 1);
       //TESTING PURPOSES ONLY!!! TEST
 
     this.updateAccountFields = {

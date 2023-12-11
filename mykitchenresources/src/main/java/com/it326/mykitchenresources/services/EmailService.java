@@ -16,6 +16,8 @@ import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.entities.Fridge;
 import com.it326.mykitchenresources.entities.Ingredient;
 
+import jakarta.transaction.Transactional;
+
 
 
 @Service
@@ -37,6 +39,7 @@ public class EmailService {
     private String fromEmail;
 
     @Scheduled(cron = "0 0 12 * * ?")
+    @Transactional
     public void notifyOfExpiredIngredients() {
 
         Date currentDate = Calendar.getInstance().getTime();
@@ -74,6 +77,7 @@ public class EmailService {
     }
 
     @Scheduled(cron = "0 0 12 * * ?")
+    @Transactional
     public void notifyOfLowIngredients() {
             
             for (Account account : accountService.findAll()) {
@@ -110,17 +114,18 @@ public class EmailService {
 
         SimpleMailMessage message = buildShoppingListMessage(account.getName(), shoppingList, emailToSendTo);
         emailSender.send(message);
+        System.out.println("Email sent to " + emailToSendTo);
     }
 
     public SimpleMailMessage textShoppingList(Integer accountId, String phoneNumberToSendTo, String recipientPhoneCarrier) {
 
         Account account = accountService.findByAccountId(accountId);
-        // List<Ingredient> shoppingList = shoppingListService.getIngredientsInShoppingList(accountId);
-        List<Ingredient> shoppingList = new ArrayList<Ingredient>();
+        List<Ingredient> shoppingList = shoppingListService.getIngredientsInShoppingList(accountId);
 
         String phoneNumber = phoneNumberToSendTo + phoneCarrierToEmail(recipientPhoneCarrier);
         SimpleMailMessage message = buildShoppingListMessage(account.getName(), shoppingList, phoneNumber);
         emailSender.send(message);
+        System.out.println("Text sent to " + phoneNumberToSendTo);
 
         return message;
     }
