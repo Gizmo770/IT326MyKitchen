@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,4 +49,14 @@ public class ShoppingList {
     public void setIngredientsInShoppingList(List<ShoppingListIngredient> ingredients) {
         this.shoppingIngredients = ingredients;
     }
+
+    public void addShoppingListIngredient(ShoppingListIngredient shoppingListIngredient) {
+    if (this.shoppingIngredients == null) {
+        this.shoppingIngredients = new ArrayList<>();
+    }
+    this.shoppingIngredients.add(shoppingListIngredient);
+    shoppingListIngredient.setShoppingList(this);
+}
+
+    
 }

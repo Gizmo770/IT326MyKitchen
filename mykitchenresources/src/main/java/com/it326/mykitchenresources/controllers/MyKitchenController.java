@@ -3,10 +3,12 @@ package com.it326.mykitchenresources.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,10 +95,24 @@ public class MyKitchenController {
         @RequestParam Integer currentAccId) {
         return shoppingListController.createShoppingList(currentAccId);
     }
+ // Delegate to ShoppingListController for adding ingredient to shopping list
+ @PostMapping("/shopping-list/{shoppingListId}/add-ingredient")
+ public ResponseEntity<String> addIngredientToShoppingList(
+     @PathVariable Integer shoppingListId,
+     @RequestParam Integer ingredientId,
+     @RequestParam(required = false) Double quantity) {
+     
+     return shoppingListController.addIngredientToShoppingList(shoppingListId, ingredientId, quantity);
+ }
 
-    //TODO: Method for adding ingredient to shopping list
-
-    //TODO: Method for removing ingredient from shopping list
+ // Delegate to ShoppingListController for removing ingredient from shopping list
+ @DeleteMapping("/shopping-list/{shoppingListId}/remove-ingredient/{ingredientId}")
+ public ResponseEntity<String> removeIngredientFromShoppingList(
+     @PathVariable Integer shoppingListId,
+     @PathVariable Integer ingredientId) {
+     
+     return shoppingListController.removeIngredientFromShoppingList(shoppingListId, ingredientId);
+ }
 
 
     /* --------------------------

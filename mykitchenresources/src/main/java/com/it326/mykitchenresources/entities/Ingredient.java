@@ -27,6 +27,8 @@ public class Ingredient {
     @Column(name = "expiration_date")
     private Date expirationDate;
 
+    
+
     //Constructors, getters, setters, etc...
     public Ingredient() {
     }
@@ -53,8 +55,17 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
+    public void setId(Long ingredientId)
+    {
+        this.ingredientId = ingredientId;
+    }
+
     public Date getExpirationDate() {
         return this.expirationDate;
+    }
+
+    public Long getId() {
+        return this.ingredientId;
     }
 
     public void setExpirationDate(Date date) {
