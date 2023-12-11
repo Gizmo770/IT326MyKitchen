@@ -147,8 +147,6 @@ public class EmailServiceTest {
         testIngredients.add(testIng);
 
         when(accountService.findByAccountId(1)).thenReturn(testAccount);
-        when(shoppingListService.getIngredientsInShoppingList(1))
-            .thenReturn(testIngredients);
     
 
         //Act
