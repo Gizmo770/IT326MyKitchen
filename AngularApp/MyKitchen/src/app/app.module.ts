@@ -18,8 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
-import { JwtModule } from '@auth0/angular-jwt';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ShareListComponent } from './components/share-list/share-list.component';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'myKitchen';

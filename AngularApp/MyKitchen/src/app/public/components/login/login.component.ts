@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { Account } from 'src/app/models/account';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,7 @@ export class LoginComponent {
     if (!this.deleteForm.valid) {
       return;
     }
-    const idValue = this.currentAccount?.id as number;
+    const idValue = this.currentAccount?.id ?? 0;
 
     this.authService.deleteAccount(idValue).pipe(
       tap(() => this.router.navigate(['../register']))

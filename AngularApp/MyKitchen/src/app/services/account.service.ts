@@ -45,14 +45,4 @@ export class AccountService {
 
   //If returns true, then the account was deleted successfully
   //We should then return to the login page
-  public deleteCurrentAccount(): Observable<boolean> {
-    if (!this.currentAccount) {
-      throw new Error('No current account to delete');
-    }
-
-    const params = new HttpParams().set('accountId', this.currentAccount.id.toString());
-    return this.http.delete(this.deleteAccountUrl, { params }).pipe(
-      map(response => response ? true : false)
-    );
-  }
 }
