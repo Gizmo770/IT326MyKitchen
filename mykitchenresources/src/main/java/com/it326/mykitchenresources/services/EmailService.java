@@ -16,6 +16,8 @@ import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.entities.Fridge;
 import com.it326.mykitchenresources.entities.Ingredient;
 
+import jakarta.transaction.Transactional;
+
 
 
 @Service
@@ -37,6 +39,7 @@ public class EmailService {
     private String fromEmail;
 
     @Scheduled(cron = "0 0 12 * * ?")
+    @Transactional
     public void notifyOfExpiredIngredients() {
 
         Date currentDate = Calendar.getInstance().getTime();
@@ -74,6 +77,7 @@ public class EmailService {
     }
 
     @Scheduled(cron = "0 0 12 * * ?")
+    @Transactional
     public void notifyOfLowIngredients() {
             
             for (Account account : accountService.findAll()) {
