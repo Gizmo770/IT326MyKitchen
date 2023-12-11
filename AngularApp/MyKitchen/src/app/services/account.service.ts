@@ -9,7 +9,7 @@ import { Account } from '../models/account';
 })
 export class AccountService {
 
-  private currentAccount?: Account;
+  public currentAccount?: Account;
 
   private createAccountUrl: string;
   private validateLoginUrl: string;
