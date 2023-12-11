@@ -1,8 +1,19 @@
 <p>Protected Dashboard works.</p>
 
+<!-- Fridge Component Link -->
+<a [routerLink]="['../../fridge']">Go to Fridge</a>
+<br>
+
+<!-- Recipe Component Link -->
+<a [routerLink]="['../../components/recip-search']">Go to Recipe</a>
+<br>
+
 <a [routerLink]="['../../public/login']">Go back to Login</a>
 <br>
 <a [routerLink]="['../../public/register']">Go back to Register</a>
 <br>
 <br>
-<button mat-raised-button (click)="logout()">Logout (remove token from localstorage)</button>
+<button mat-raised-button (click)="logout()">Logout</button>
+
+<!-- Router Outlet to Display Fridge and Recipe Components -->
+<router-outlet></router-outlet>

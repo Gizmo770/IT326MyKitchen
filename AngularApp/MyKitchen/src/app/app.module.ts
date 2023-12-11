@@ -21,7 +21,7 @@ import { RecipeSearchComponent } from './components/recipe-search/recipe-search.
 import { ShareListComponent } from './components/share-list/share-list.component';
 import { UpdateAccountComponent } from './components/update-account/update-account.component';
 
-export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
+export const LOCALSTORAGE_TOKEN_KEY = 'myKitchen';
 
 export function tokenGetter() {
   return localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
@@ -47,15 +47,16 @@ export function tokenGetter() {
     // Angular Modules
     BrowserAnimationsModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
     AppRoutingModule,
-    HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter,
-        allowedDomains: ['localhost:8081'],
-        disallowedRoutes: ['localhost:8081/auth/login']
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000', 'localhost:8080']
       }
     })
   ],

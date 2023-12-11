@@ -18,6 +18,14 @@ const routes: Routes = [
     loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule)
   },
   {
+    path: 'fridge',
+    component: FridgeComponent
+  },
+  {
+    path: 'recipe',
+    component: RecipeSearchComponent
+  },
+  {
     // Redirects all paths that are not matching to the 'public' route/path
     path: '**',
     redirectTo: 'public',

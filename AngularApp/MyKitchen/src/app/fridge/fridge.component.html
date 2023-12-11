@@ -34,9 +34,20 @@
                 </div>
             </div>
 
-
             <!-- Delete Fridge Button -->
             <p-button label="Delete Fridge" icon="pi pi-trash" (click)="deleteFridge(fridge)"></p-button>
         </p-card>
     </div>
 </div>
+
+<a [routerLink]="['../../components/recip-search']">Go to Recipe</a>
+<br>
+
+<a [routerLink]="['../../public/login']">Go back to Login</a>
+<br>
+<a [routerLink]="['../../public/register']">Go back to Register</a>
+<br>
+<br>
+
+<!-- Router Outlet to Display Fridge and Recipe Components -->
+<router-outlet></router-outlet>

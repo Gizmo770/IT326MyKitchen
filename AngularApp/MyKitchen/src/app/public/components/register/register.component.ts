@@ -37,9 +37,14 @@ export class RegisterComponent {
     //   // If registration was successfull, then navigate to login route
     //   tap(() => this.router.navigate(['../login']))
     // ).subscribe();
-    this.authService.createAccount(this.registerForm.value.name as unknown as string, this.registerForm.value.email as unknown as string, this.registerForm.value.password as unknown as string).pipe(
+    const nameValue = this.registerForm.get('name')?.value ?? '';
+    const usernameValue = this.registerForm.get('username')?.value ?? '';
+    const passwordValue = this.registerForm.get('password')?.value ?? '';
+
+    this.authService.createAccount(nameValue, usernameValue, passwordValue).pipe(
       tap(() => this.router.navigate(['../login']))
     ).subscribe();
+
   }
 
 }

@@ -12,21 +12,23 @@ import { AuthService } from '../../services/auth-service/auth.service';
 export class LoginComponent {
 
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    username: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required]),
   });
 
   constructor(
+    private router: Router,
     private authService: AuthService,
-    private router: Router
   ) { }
 
   login() {
     if (!this.loginForm.valid) {
       return;
     }
-    this.authService.login(this.loginForm.value).pipe(
-      // route to protected/dashboard, if login was successfull
+    const usernameValue = this.loginForm.get('username')?.value ?? '';
+    const passwordValue = this.loginForm.get('password')?.value ?? '';
+
+    this.authService.login(usernameValue, passwordValue).pipe(
       tap(() => this.router.navigate(['../../protected/dashboard']))
     ).subscribe();
   }
