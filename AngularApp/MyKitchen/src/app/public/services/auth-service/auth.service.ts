@@ -3,29 +3,13 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Account } from '../../../models/account';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../interfaces';
-
-export const fakeLoginResponse: LoginResponse = {
-  // fakeAccessToken.....should all come from real backend
-  accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-  refreshToken: {
-    id: 1,
-    userId: 2,
-    token: 'fakeRefreshToken...should al come from real backend',
-    refreshCount: 2,
-    expiryDate: new Date(),
-  },
-  tokenType: 'JWT'
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentAccount?: Account;
-
   private createAccountUrl: string;
   private validateLoginUrl: string;
   private deleteAccountUrl: string;
@@ -42,12 +26,6 @@ export class AuthService {
   }
 
   public login(username: string, password: string): Observable<LoginResponse> {
-    // return of(fakeLoginResponse).pipe(
-    //   tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
-    //   tap(() => this.snackbar.open('Login Successfull', 'Close', {
-    //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-    //   }))
-    // );
     const params = new HttpParams()
       .set('username', username)
       .set('password', password);
@@ -76,14 +54,13 @@ export class AuthService {
     );
   }
 
-  public deleteAccount(username: string, password: string): Observable<boolean> {
+  public deleteAccount(id: number): Observable<boolean> {
     const params = new HttpParams()
-      .set('username', username)
-      .set('password', password);
+      .set('accountId', id);
     return this.http.delete<any>(this.deleteAccountUrl, { params }).pipe(
       map(response => response ? true : false),
       catchError(error => {
-        console.error('Error creating account:', error);
+        console.error('Error deleting account:', error);
         return of(false); // Return a default value in case of an error
       })
     );
