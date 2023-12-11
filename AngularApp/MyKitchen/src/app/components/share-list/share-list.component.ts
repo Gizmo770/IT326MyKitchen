@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
+import { Account } from 'src/app/models/account';
+
+import { AccountService } from 'src/app/services/account.service';
 
 import { EmailService } from 'src/app/services/email.service';
 
@@ -9,7 +12,8 @@ import { EmailService } from 'src/app/services/email.service';
   templateUrl: './share-list.component.html',
   styleUrls: ['./share-list.component.scss']
 })
-export class ShareListComponent {
+export class ShareListComponent implements OnInit {
+
   displayEmailModal: boolean = false;
   displayTextModal: boolean = false;
 
@@ -22,33 +26,24 @@ export class ShareListComponent {
     recipientPhoneCarrier: new FormControl(''),
   });
 
-  phoneCarriers = [
-    {label: 'AT&T', value: '@txt.att.net'},
-    {label: 'Verizon', value: '@vtext.com'},
-    {label: 'T-Mobile', value: '@tmomail.net'},
-    {label: 'Sprint', value: '@messaging.sprintpcs.com'},
-    {label: 'Virgin Mobile', value: '@vmobl.com'},
-    {label: 'Tracfone', value: '@mmst5.tracfone.com'},
-    {label: 'Metro PCS', value: '@mymetropcs.com'},
-    {label: 'Boost Mobile', value: '@sms.myboostmobile.com'},
-    {label: 'Cricket', value: '@sms.cricketwireless.net'},
-    {label: 'Republic Wireless', value: '@text.republicwireless.com'},
-    {label: 'Google Fi', value: '@msg.fi.google.com'},
-    {label: 'U.S. Cellular', value: '@email.us'},
-    {label: 'Ting', value: '@message.ting.com'},
-    {label: 'Consumer Cellular', value: '@mailmymobile.net'},
-    {label: 'C-Spire', value: '@cspire1.com'},
-    {label: 'Page Plus', value: '@vtext.com'},
-    {label: 'Xfinity Mobile', value: '@vtext.com'}
-  ];
+  phoneCarriers: any;
 
-  constructor(private emailService: EmailService) {}
+  constructor(private emailService: EmailService, private accountService: AccountService) {}
+
+  ngOnInit(): void {
+    // //TESTING PURPOSES ONLY!!! TEST
+    // this.accountService.currentAccount =
+    // new Account(6, 'TestName', 'TestUsername', 'testpass' +
+    // 'test@example.com', '1234567890', '@txt.att.net', 5);
+    // //TESTING PURPOSES ONLY!!! TEST
+    this.phoneCarriers = this.accountService.accountPhoneCarriers;
+  }
 
   emailShoppingList() {
     if (this.emailForm) {
       const emailToSendTo = this.emailForm.get('emailToSendTo')?.value;
       if (emailToSendTo) {
-        this.emailService.sendShoppingListThroughEmail(1, emailToSendTo).subscribe();
+        this.emailService.sendShoppingListThroughEmail(this.accountService.currentAccount?.id ?? 0, emailToSendTo).subscribe();
         this.displayEmailModal = false;
       }
     }
@@ -59,7 +54,7 @@ export class ShareListComponent {
       const phoneNumberToSendTo = this.textForm.get('numberToSendTo')?.value;
       const recipientPhoneCarrier = this.textForm.get('recipientPhoneCarrier')?.value;
       if (phoneNumberToSendTo && recipientPhoneCarrier) {
-        this.emailService.sendShoppingListThroughText(1, phoneNumberToSendTo, recipientPhoneCarrier).subscribe();
+        this.emailService.sendShoppingListThroughText(this.accountService.currentAccount?.id ?? 0, phoneNumberToSendTo, recipientPhoneCarrier).subscribe();
         this.displayTextModal = false;
       }
     }

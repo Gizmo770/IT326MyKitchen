@@ -110,7 +110,8 @@ public class EmailService {
     public SimpleMailMessage textShoppingList(Integer accountId, String phoneNumberToSendTo, String recipientPhoneCarrier) {
 
         Account account = accountService.findByAccountId(accountId);
-        List<Ingredient> shoppingList = shoppingListService.getIngredientsInShoppingList(accountId);
+        // List<Ingredient> shoppingList = shoppingListService.getIngredientsInShoppingList(accountId);
+        List<Ingredient> shoppingList = new ArrayList<Ingredient>();
 
         String phoneNumber = phoneNumberToSendTo + phoneCarrierToEmail(recipientPhoneCarrier);
         SimpleMailMessage message = buildShoppingListMessage(account.getName(), shoppingList, phoneNumber);

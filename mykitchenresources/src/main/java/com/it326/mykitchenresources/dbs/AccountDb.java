@@ -7,8 +7,8 @@ import com.it326.mykitchenresources.entities.Account;
 
 @Repository
 public interface AccountDb extends JpaRepository<Account, Integer> {
-    
-    public Account findByAccountId(int accountId);
+
+    public Account findByAccountId(Integer accountId);
 
     public Account findByUsername(String userName);
 

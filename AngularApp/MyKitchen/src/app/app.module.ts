@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
 import { ShareListComponent } from './components/share-list/share-list.component';
+import { UpdateAccountComponent } from './components/update-account/update-account.component';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
 
@@ -32,6 +33,7 @@ export function tokenGetter() {
     FridgeComponent,
     RecipeSearchComponent,
     ShareListComponent,
+    UpdateAccountComponent
   ],
   imports: [
     // PrimeNG Modules
