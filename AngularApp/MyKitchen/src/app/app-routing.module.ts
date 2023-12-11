@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth-guard/auth.guard';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,8 @@ const routes: Routes = [
     path: 'recipe',
     component: RecipeSearchComponent
   },
+  { path: 'shopping-list', component: ShoppingListComponent },
+
   {
     // Redirects all paths that are not matching to the 'public' route/path
     path: '**',
