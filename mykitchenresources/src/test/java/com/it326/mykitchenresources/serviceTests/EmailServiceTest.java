@@ -19,13 +19,13 @@ import com.it326.mykitchenresources.services.EmailService;
 import com.it326.mykitchenresources.services.FridgeService;
 import com.it326.mykitchenresources.services.ShoppingListService;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,15 +71,19 @@ public class EmailServiceTest {
     //when the fridge has expired ingredients
     @Test
     public void testNotifyOfExpiredIngredients() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, +8);
+        Date eightDaysAgo = calendar.getTime();
+        
         Fridge fridge = new Fridge();
         fridge.setIngredients(new ArrayList<>());
 
         Ingredient ingredient1 = new Ingredient();
-        ingredient1.setExpirationDate(Calendar.getInstance().getTime());
+        ingredient1.setExpirationDate(eightDaysAgo);
         fridge.getIngredients().add(ingredient1);
 
         Ingredient ingredient2 = new Ingredient();
-        ingredient2.setExpirationDate(Calendar.getInstance().getTime());
+        ingredient2.setExpirationDate(eightDaysAgo);
         fridge.getIngredients().add(ingredient2);
 
         when(accountService.findAll()).thenReturn(Collections.singletonList(account));

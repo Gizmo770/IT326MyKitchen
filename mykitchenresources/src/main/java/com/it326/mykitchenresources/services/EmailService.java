@@ -51,7 +51,7 @@ public class EmailService {
             for (Ingredient ingredient : fridge.getIngredients()) {
                 if (ingredient.getExpirationDate() != null) {
                     if(ingredient.getExpirationDate().after(currentDate) 
-                    && ingredient.getExpirationDate().before(oneWeekFromNow)) {
+                    || ingredient.getExpirationDate().before(oneWeekFromNow)) {
                         expIngredients.add(ingredient);
                     }
                 }
