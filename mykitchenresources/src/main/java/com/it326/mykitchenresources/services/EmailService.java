@@ -2,6 +2,7 @@ package com.it326.mykitchenresources.services;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +39,19 @@ public class EmailService {
     @Scheduled(cron = "0 0 12 * * ?")
     public void notifyOfExpiredIngredients() {
 
+        Date currentDate = Calendar.getInstance().getTime();
+
         Calendar weekFromNowCalendar = Calendar.getInstance();
         weekFromNowCalendar.add(Calendar.DAY_OF_MONTH, 7);
+        Date oneWeekFromNow = weekFromNowCalendar.getTime();
 
         for (Account account : accountService.findAll()) {
             List<Ingredient> expIngredients = new ArrayList<Ingredient>();
             Fridge fridge = fridgeService.getFridgeByAccountId(account.getAccountId());
             for (Ingredient ingredient : fridge.getIngredients()) {
                 if (ingredient.getExpirationDate() != null) {
-                    if(ingredient.getExpirationDate().before(weekFromNowCalendar.getTime())) {
+                    if(ingredient.getExpirationDate().after(currentDate) 
+                    && ingredient.getExpirationDate().before(oneWeekFromNow)) {
                         expIngredients.add(ingredient);
                     }
                 }
