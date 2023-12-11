@@ -4,6 +4,7 @@ import { CustomValidators } from '../../custom-validator';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { RegisterRequest } from '../../interfaces';
 
 @Component({
   selector: 'app-register',
@@ -32,17 +33,18 @@ export class RegisterComponent {
     if (!this.registerForm.valid) {
       return;
     }
-    // this.authService.register(this.registerForm.value as unknown as RegisterRequest).pipe(
-    //   // If registration was successfull, then navigate to login route
-    //   tap(() => this.router.navigate(['../login']))
-    // ).subscribe();
-    const nameValue = this.registerForm.get('name')?.value ?? '';
-    const usernameValue = this.registerForm.get('username')?.value ?? '';
-    const passwordValue = this.registerForm.get('password')?.value ?? '';
-
-    this.authService.createAccount(nameValue, usernameValue, passwordValue).pipe(
+    this.authService.register(this.registerForm.value as unknown as RegisterRequest).pipe(
+      // If registration was successfull, then navigate to login route
       tap(() => this.router.navigate(['../login']))
     ).subscribe();
+    // const nameValue = this.registerForm.get('name')?.value ?? '';
+    // const usernameValue = this.registerForm.get('username')?.value ?? '';
+    // const passwordValue = this.registerForm.get('password')?.value ?? '';
+
+    // this.authService.createAccount(nameValue, usernameValue, passwordValue).pipe(
+    //   tap(() => this.router.navigate(['../login']))
+    // ).subscribe();
+
   }
 
 }

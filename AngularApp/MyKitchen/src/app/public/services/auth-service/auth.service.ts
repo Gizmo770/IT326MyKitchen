@@ -7,23 +7,23 @@ import { Account } from '../../../models/account';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../interfaces';
 
-// export const fakeLoginResponse: LoginResponse = {
-//   // fakeAccessToken.....should all come from real backend
-//   accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-//   refreshToken: {
-//     id: 1,
-//     userId: 2,
-//     token: 'fakeRefreshToken...should al come from real backend',
-//     refreshCount: 2,
-//     expiryDate: new Date(),
-//   },
-//   tokenType: 'JWT'
-// }
+export const fakeLoginResponse: LoginResponse = {
+  // fakeAccessToken.....should all come from real backend
+  accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+  refreshToken: {
+    id: 1,
+    userId: 2,
+    token: 'fakeRefreshToken...should al come from real backend',
+    refreshCount: 2,
+    expiryDate: new Date(),
+  },
+  tokenType: 'JWT'
+}
 
-// export const fakeRegisterResponse: RegisterResponse = {
-//   status: 200,
-//   message: 'Registration sucessfull.'
-// }
+export const fakeRegisterResponse: RegisterResponse = {
+  status: 200,
+  message: 'Registration sucessfull.'
+}
 
 
 @Injectable({
@@ -55,36 +55,36 @@ export class AuthService {
    The `..of()..` can be removed if you have a real backend, at the moment, this is just a faked response
   */
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    // return of(fakeLoginResponse).pipe(
-    //   tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
-    //   tap(() => this.snackbar.open('Login Successfull', 'Close', {
-    //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-    //   }))
-    // );
-    return this.http.post<LoginResponse>('http://localhost:8081/account/login', loginRequest).pipe(
+    return of(fakeLoginResponse).pipe(
       tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
       tap(() => this.snackbar.open('Login Successfull', 'Close', {
         duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
       }))
     );
+    // return this.http.post<LoginResponse>('http://localhost:8081/account/login', loginRequest).pipe(
+    //   tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
+    //   tap(() => this.snackbar.open('Login Successfull', 'Close', {
+    //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    //   }))
+    // );
   }
 
   /*
    The `..of()..` can be removed if you have a real backend, at the moment, this is just a faked response
   */
-  // register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
-  //   // TODO
-  //   // return of(fakeRegisterResponse).pipe(
-  //   //   tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
-  //   //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-  //   //   })),
-  //   // );
-  //   return this.http.post<RegisterResponse>('http://localhost:8081/account/create', registerRequest).pipe(
-  //     tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
-  //       duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-  //     }))
-  //   )
-  // }
+  register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
+    //   // TODO
+    return of(fakeRegisterResponse).pipe(
+      tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
+        duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+      })),
+    );
+    //   return this.http.post<RegisterResponse>('http://localhost:8081/account/create', registerRequest).pipe(
+    //     tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
+    //       duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    //     }))
+    //   )
+  }
 
   public createAccount(name: string, username: string, password: string): Observable<boolean> {
     const body = {
@@ -93,7 +93,7 @@ export class AuthService {
       password: password
     }; // Use an object for the request body
 
-    return this.http.post<any>(this.createAccountUrl, body).pipe(
+    return this.http.post<any>(this.createAccountUrl, { body }).pipe(
       map(response => response ? true : false),
       catchError(error => {
         console.error('Error creating account:', error);
