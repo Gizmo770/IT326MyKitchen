@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { Account } from 'src/app/models/account';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,17 @@ import { AuthService } from '../../services/auth-service/auth.service';
 })
 export class LoginComponent {
 
+  private currentAccount?: Account;
+
   loginForm: FormGroup = new FormGroup({
     username: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required]),
   });
+
+  deleteForm: FormGroup = new FormGroup({
+    username: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required]),
+  })
 
   constructor(
     private router: Router,
@@ -30,6 +39,17 @@ export class LoginComponent {
 
     this.authService.login(usernameValue, passwordValue).pipe(
       tap(() => this.router.navigate(['../../protected/dashboard']))
+    ).subscribe();
+  }
+
+  delete() {
+    if (!this.deleteForm.valid) {
+      return;
+    }
+    const idValue = this.currentAccount?.id ?? 0;
+
+    this.authService.deleteAccount(idValue).pipe(
+      tap(() => this.router.navigate(['../register']))
     ).subscribe();
   }
 

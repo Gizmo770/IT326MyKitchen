@@ -50,6 +50,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     MatSnackBarModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     HttpClientModule,
