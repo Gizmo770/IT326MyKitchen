@@ -1,0 +1,16 @@
+<h2>Shopping List</h2>
+
+<!-- Form to add a new ingredient -->
+<form (ngSubmit)="addIngredient()">
+  <input type="text" [(ngModel)]="newIngredient.name" name="name" placeholder="Ingredient name" required>
+  <input type="number" [(ngModel)]="newIngredient.quantity" name="quantity" placeholder="Quantity" required>
+  <button type="submit">Add Ingredient</button>
+</form>
+
+<!-- List of ingredients -->
+<ul>
+  <li *ngFor="let ingredient of ingredients">
+    {{ ingredient.name }}: {{ ingredient.quantity }}
+    <button *ngIf="ingredient.id !== null" (click)="removeIngredient(ingredient.id)">Remove</button>
+  </li>
+</ul>

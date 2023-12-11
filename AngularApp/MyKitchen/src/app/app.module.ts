@@ -4,7 +4,7 @@ import { CardModule } from 'primeng/card';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from '@angular/forms';
-
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
