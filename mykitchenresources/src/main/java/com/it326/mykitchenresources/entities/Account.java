@@ -36,7 +36,7 @@ public class Account {
     private String phoneCarrier;
 
     @Column(name = "ingredient_low_threshold")
-    private double ingredientLowThreshold;
+    private Double ingredientLowThreshold;
 
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ShoppingList shoppingList;

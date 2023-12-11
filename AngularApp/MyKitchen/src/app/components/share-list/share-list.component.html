@@ -1,0 +1,22 @@
+<!-- Button to open email modal -->
+<p-button label="Email Shopping List" (click)="displayEmailModal = true"></p-button>
+
+<!-- Email Modal -->
+<p-dialog class="send-modal" header="Email Shopping List" [(visible)]="displayEmailModal" [modal]="true" [style]="{width: '50vw'}">
+    <form [formGroup]="emailForm" (ngSubmit)="emailShoppingList()">
+        <input type="text" formControlName="emailToSendTo" placeholder="Enter email recipient">
+        <p-button type="submit" label="Send"></p-button>
+    </form>
+</p-dialog>
+
+<!-- Button to open text modal -->
+<p-button label="Text Shopping List" (click)="displayTextModal = true"></p-button>
+
+<!-- Text Modal -->
+<p-dialog header="Text Shopping List" [(visible)]="displayTextModal" [modal]="true" [style]="{width: '50vw'}">
+    <form [formGroup]="textForm" (ngSubmit)="textShoppingList()">
+        <input type="text" formControlName="numberToSendTo" placeholder="Enter phone number">
+        <p-dropdown formControlName="recipientPhoneCarrier" [options]="phoneCarriers" placeholder="Please pick a carrier to send to"></p-dropdown>
+        <p-button type="submit" label="Send"></p-button>
+    </form>
+</p-dialog>
