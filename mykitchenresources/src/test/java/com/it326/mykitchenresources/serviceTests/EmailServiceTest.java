@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import com.it326.mykitchenresources.dbs.IngredientDb;
 import com.it326.mykitchenresources.entities.Account;
 import com.it326.mykitchenresources.entities.Fridge;
 import com.it326.mykitchenresources.entities.Ingredient;
@@ -18,6 +19,7 @@ import com.it326.mykitchenresources.services.EmailService;
 import com.it326.mykitchenresources.services.FridgeService;
 import com.it326.mykitchenresources.services.ShoppingListService;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -34,6 +36,9 @@ public class EmailServiceTest {
 
     @Mock
     private FridgeService fridgeService;
+
+    @Mock
+    private IngredientDb ingredientRepository;
 
     @Mock
     private ShoppingListService shoppingListService;
@@ -86,8 +91,6 @@ public class EmailServiceTest {
         // Verify the email sender
         verify(emailSender, times(2)).send(any(SimpleMailMessage.class));
     }
-    
-    
 
     @Test
     public void testNotifyOfLowIngredients() {
