@@ -13,7 +13,8 @@ export class UpdateAccountComponent implements OnInit {
   updateAccountFields: any;
   accountPhoneCarriers: any;
 
-  constructor(private accountService: AccountService,
+  constructor(
+    private accountService: AccountService,
     private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -48,7 +49,7 @@ export class UpdateAccountComponent implements OnInit {
     if (!this.updateAccountFields.name || !this.updateAccountFields.username ||
       !this.updateAccountFields.password || !this.updateAccountFields.email || !this.updateAccountFields.phoneNumber) {
       this.snackBar.open('One or more account fields are not defined', 'Close', {
-        duration: 3000,
+        duration: 3000, verticalPosition: 'top', horizontalPosition: 'right'
       });
     }
 
@@ -72,7 +73,7 @@ export class UpdateAccountComponent implements OnInit {
       console.log('Account updated:', updatedAccount);
       this.accountService.setCurrentAccount(updatedAccount);
       this.snackBar.open('Account updated successfully', 'Close', {
-        duration: 3000,
+        duration: 3000, verticalPosition: 'top', horizontalPosition: 'right'
       });
       setTimeout(() => {
         location.reload();

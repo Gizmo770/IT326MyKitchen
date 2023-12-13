@@ -30,13 +30,13 @@ export class EmailService {
       .set('emailToSendTo', emailToSendTo);
     return this.http.post(this.sendEmailUrl, params, { responseType: 'text' }).pipe(
       tap(() => {
-        this.snackBar.open('Email sent', 'Close', { duration: 2000 });
+        this.snackBar.open('Email sent', 'Close', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' });
         setTimeout(() => {
           location.reload();
         }, 2000);
       }),
       catchError(error => {
-        this.snackBar.open('SERVER ERROR: Failed to send email', 'Close', { duration: 2000 });
+        this.snackBar.open('SERVER ERROR: Failed to send email', 'Close', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' });
         return throwError(error);
       })
     );
@@ -50,13 +50,13 @@ export class EmailService {
       .set('recipientPhoneCarrier', recipientPhoneCarrier);
     return this.http.post(this.sendTextUrl, params, { responseType: 'text' }).pipe(
       tap(() => {
-        this.snackBar.open('Text sent', 'Close', { duration: 2000 });
+        this.snackBar.open('Text sent', 'Close', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' });
         setTimeout(() => {
           location.reload();
         }, 2000);
       }),
       catchError(error => {
-        this.snackBar.open('SERVER ERROR: Failed to send text', 'Close', { duration: 2000 });
+        this.snackBar.open('SERVER ERROR: Failed to send text', 'Close', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' });
         return throwError(error);
       })
     );
