@@ -1,11 +1,10 @@
-<form (ngSubmit)="updateAccount()">
-  <input [(ngModel)]="updateAccountFields.name" name="name" [placeholder]="updateAccountFields.name ? updateAccountFields.name : 'NO NAME'" required>
-  <input [(ngModel)]="updateAccountFields.username" name="username" [placeholder]="updateAccountFields.username ? updateAccountFields.username : 'NO USERNAME'" required>
-  <input [(ngModel)]="updateAccountFields.password" name="password" [placeholder]="updateAccountFields.password ? updateAccountFields.password : 'NO PASSWORD'" required>
-  <input [(ngModel)]="updateAccountFields.email" name="email" [placeholder]="updateAccountFields.email ? updateAccountFields.email : 'NO EMAIL'" required>
-  <input [(ngModel)]="updateAccountFields.phoneNumber" name="phoneNumber" [placeholder]="updateAccountFields.phoneNumber ? updateAccountFields.phoneNumber : 'NO PHONE NUMBER'" required>
-  <select [(ngModel)]="updateAccountFields.phoneCarrier" name="phoneCarrier" required>
-    <option *ngFor="let carrier of accountPhoneCarriers" [value]="carrier.value">{{carrier.label}}</option>
-  </select>
-  <input [(ngModel)]="updateAccountFields.lowIngredientThreshold" name="lowIngredientThreshold" [placeholder]="updateAccountFields.lowIngredientThreshold ? updateAccountFields.lowIngredientThreshold : 'NO LOW INGREDIENT THRESHOLD'" required>  <button type="submit">Update Account</button>
+<form [formGroup]="updateAccountForm" (ngSubmit)="updateAccount()" class="p-fluid">
+  <p-inputText formControlName="name" placeholder="Name"></p-inputText>
+  <p-inputText formControlName="username" placeholder="Username"></p-inputText>
+  <p-password formControlName="password" placeholder="Password"></p-password>
+  <p-inputText formControlName="email" placeholder="Email"></p-inputText>
+  <p-inputText formControlName="phoneNumber" placeholder="Phone Number"></p-inputText>
+  <p-dropdown formControlName="phoneCarrier" [options]="accountPhoneCarriers" optionLabel="label"></p-dropdown>
+  <p-inputNumber formControlName="lowIngredientThreshold" placeholder="Low Ingredient Threshold"></p-inputNumber>
+  <p-button type="submit" label="Update Account"></p-button>
 </form>

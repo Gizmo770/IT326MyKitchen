@@ -10,6 +10,8 @@ import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -44,6 +46,8 @@ export function tokenGetter() {
     InputTextModule,
     DialogModule,
     DropdownModule,
+    PasswordModule,
+    InputNumberModule,
     // Angular Modules
     BrowserAnimationsModule,
     BrowserModule,

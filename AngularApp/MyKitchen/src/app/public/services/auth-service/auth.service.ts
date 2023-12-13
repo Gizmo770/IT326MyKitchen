@@ -4,8 +4,8 @@ import { catchError, map, Observable, of, switchMap, tap, throwError } from 'rxj
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../interfaces';
 import { Account } from 'src/app/models/account';
+import { AccountService } from 'src/app/services/account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private snackbar: MatSnackBar,
-    private jwtService: JwtHelperService
+    private jwtService: JwtHelperService,
+    private accountService: AccountService
   ) {
     this.createAccountUrl = 'http://localhost:8081/account/create';
     this.validateLoginUrl = 'http://localhost:8081/account/login';
@@ -43,6 +44,7 @@ export class AuthService {
           this.snackbar.open('Login Successful', 'Close', {
             duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
           });
+          this.accountService.currentAccount = res;
         } else {
           throw new Error('No account or username in response');
         }
