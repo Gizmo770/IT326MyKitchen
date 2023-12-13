@@ -20,13 +20,13 @@ export class UpdateAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateAccountForm = new FormGroup({
-      'name': new FormControl(this.accountService.currentAccount ? this.accountService.currentAccount.name : '', Validators.required),
-      'username': new FormControl(this.accountService.currentAccount ? this.accountService.currentAccount.userName : '', Validators.required),
-      'password': new FormControl('', Validators.required),
-      'email': new FormControl(this.accountService.currentAccount ? this.accountService.currentAccount.email : '', [Validators.required, Validators.email]),
-      'phoneNumber': new FormControl(this.accountService.currentAccount ? this.accountService.currentAccount.phoneNumber : '', Validators.required),
-      'phoneCarrier': new FormControl(this.accountService.currentAccount ? this.accountService.currentAccount.phoneCarrier : '', Validators.required),
-      'lowIngredientThreshold': new FormControl(this.accountService.currentAccount ? this.accountService.currentAccount.lowIngredientThreshold : null, Validators.required)
+      'name': new FormControl(null, Validators.required),
+      'username': new FormControl(null, Validators.required),
+      'password': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'phoneNumber': new FormControl(null, Validators.required),
+      'phoneCarrier': new FormControl(null, Validators.required),
+      'lowIngredientThreshold': new FormControl(null, Validators.required)
     });
 
       //TESTING PURPOSES ONLY!!! TEST
@@ -71,13 +71,13 @@ export class UpdateAccountComponent implements OnInit {
     }
 
     this.accountService.updateAccount(
-      this.updateAccountForm.value.name,
-      this.updateAccountForm.value.username,
-      this.updateAccountForm.value.password,
-      this.updateAccountForm.value.email,
-      this.updateAccountForm.value.phoneNumber,
-      this.updateAccountForm.value.phoneCarrier,
-      this.updateAccountForm.value.lowIngredientThreshold
+      this.updateAccountFields.name,
+      this.updateAccountFields.username,
+      this.updateAccountFields.password,
+      this.updateAccountFields.email,
+      this.updateAccountFields.phoneNumber,
+      this.updateAccountFields.phoneCarrier,
+      this.updateAccountFields.lowIngredientThreshold
     ).subscribe(updatedAccount => {
       console.log('Account updated:', updatedAccount);
       this.accountService.currentAccount = updatedAccount;
