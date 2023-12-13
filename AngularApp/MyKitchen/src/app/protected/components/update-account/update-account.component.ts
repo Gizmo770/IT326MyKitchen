@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from 'src/app/models/account';
 import { AccountService } from 'src/app/services/account.service';
 
@@ -12,14 +13,15 @@ export class UpdateAccountComponent implements OnInit {
   updateAccountFields: any;
   accountPhoneCarriers: any;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-      //TESTING PURPOSES ONLY!!! TEST
-      this.accountService.currentAccount =
-        new Account(12, 'Gian Garnica', 'gjgarn1test', 'testpass' +
-        'gjgarn1@ilstu.edu', '8157355994', 'AT&T', 1);
-      //TESTING PURPOSES ONLY!!! TEST
+      // //TESTING PURPOSES ONLY!!! TEST
+      // this.accountService.currentAccount =
+      //   new Account(12, 'Gian Garnica', 'gjgarn1test', 'testpass' +
+      //   'gjgarn1@ilstu.edu', '8157355994', 'AT&T', 1);
+      // //TESTING PURPOSES ONLY!!! TEST
 
     this.updateAccountFields = {
       name: this.accountService.currentAccount ? this.accountService.currentAccount.name : '',
@@ -67,7 +69,9 @@ export class UpdateAccountComponent implements OnInit {
     ).subscribe(updatedAccount => {
       console.log('Account updated:', updatedAccount);
       this.accountService.currentAccount = updatedAccount;
-      alert('Account updated successfully');
+      this.snackBar.open('Account updated successfully', 'Close', {
+        duration: 3000,
+      });
       setTimeout(() => {
         location.reload();
       }, 3000);

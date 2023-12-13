@@ -9,31 +9,31 @@ import { UpdateAccountComponent } from './components/update-account/update-accou
 // Routes for child Module (protectedModule). Since protected module is lazy loaded in in the
 // app-routing.module the full path is `/protected/dashboard`
 const routes: Routes = [
-    {
-        path: 'dashboard',
-        component: DashboardComponent
-    },
-    {
-        path: 'fridge',
-        component: FridgeComponent
-    },
-    {
-        path: 'components/recipe-search',
-        component: RecipeSearchComponent
-    },
-    {
-      path: 'share-shopping-list',
-      component: ShareListComponent
-    },
-    {
-      path: 'update-account',
-      component: UpdateAccountComponent
-    },
-    {
-        path: '**',
-        redirectTo: 'login',
-        pathMatch: 'full'
-    }
+  {
+      path: 'dashboard',
+      component: DashboardComponent
+  },
+  {
+      path: 'fridge',
+      component: FridgeComponent
+  },
+  {
+      path: 'recipe-search',
+      component: RecipeSearchComponent
+  },
+  {
+    path: 'share-shopping-list',
+    component: ShareListComponent
+  },
+  {
+    path: 'update-account',
+    component: UpdateAccountComponent
+  },
+  {
+      path: '**',
+      redirectTo: 'login',
+      pathMatch: 'full'
+  }
 ];
 
 @NgModule({

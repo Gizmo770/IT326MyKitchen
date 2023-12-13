@@ -1,11 +1,33 @@
-<form (ngSubmit)="updateAccount()">
-  <input [(ngModel)]="updateAccountFields.name" name="name" [placeholder]="updateAccountFields.name ? updateAccountFields.name : 'NO NAME'" required>
-  <input [(ngModel)]="updateAccountFields.username" name="username" [placeholder]="updateAccountFields.username ? updateAccountFields.username : 'NO USERNAME'" required>
-  <input [(ngModel)]="updateAccountFields.password" name="password" [placeholder]="updateAccountFields.password ? updateAccountFields.password : 'NO PASSWORD'" required>
-  <input [(ngModel)]="updateAccountFields.email" name="email" [placeholder]="updateAccountFields.email ? updateAccountFields.email : 'NO EMAIL'" required>
-  <input [(ngModel)]="updateAccountFields.phoneNumber" name="phoneNumber" [placeholder]="updateAccountFields.phoneNumber ? updateAccountFields.phoneNumber : 'NO PHONE NUMBER'" required>
-  <select [(ngModel)]="updateAccountFields.phoneCarrier" name="phoneCarrier" required>
-    <option *ngFor="let carrier of accountPhoneCarriers" [value]="carrier.value">{{carrier.label}}</option>
-  </select>
-  <input [(ngModel)]="updateAccountFields.lowIngredientThreshold" name="lowIngredientThreshold" [placeholder]="updateAccountFields.lowIngredientThreshold ? updateAccountFields.lowIngredientThreshold : 'NO LOW INGREDIENT THRESHOLD'" required>  <button type="submit">Update Account</button>
-</form>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<div class="container">
+  <h1 class="text-center">Update Account</h1>
+  <div class="form-container">
+    <form (ngSubmit)="updateAccount()" class="mt-3">
+      <div class="form-group">
+        <input [(ngModel)]="updateAccountFields.name" name="name" class="form-control" placeholder="Name" required>
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="updateAccountFields.username" name="username" class="form-control" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <p-password [(ngModel)]="updateAccountFields.password" inputId="password" placeholder="Password" required></p-password>  </div>
+      <div class="form-group">
+        <input [(ngModel)]="updateAccountFields.email" name="email" type="email" class="form-control" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="updateAccountFields.phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number" required>
+      </div>
+      <div class="form-group">
+        <select [(ngModel)]="updateAccountFields.phoneCarrier" name="phoneCarrier" class="form-control" required>
+          <option value="" disabled selected>Select a phone carrier</option>
+          <option *ngFor="let carrier of accountPhoneCarriers" [value]="carrier.value">{{carrier.label}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="updateAccountFields.lowIngredientThreshold" name="lowIngredientThreshold" class="form-control" placeholder="Low Ingredient Threshold" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Account</button>
+    </form>
+  </div>
+</div>

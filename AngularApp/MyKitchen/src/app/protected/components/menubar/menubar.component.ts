@@ -1,14 +1,15 @@
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
 import { MenuItem } from 'primeng/api';
+import { Menu } from 'primeng/menu';
+import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-menubar',
+  templateUrl: './menubar.component.html',
+  styleUrl: './menubar.component.scss'
 })
-export class DashboardComponent {
+export class MenubarComponent {
 
   items: MenuItem[] = [];
 
@@ -19,31 +20,38 @@ export class DashboardComponent {
   ngOnInit() {
     this.items = [
       {
+        label: 'Dashboard',
+        icon: 'pi pi-home',
+        command: () => {
+          this.router.navigate(['/protected/dashboard']); // Corrected navigation path
+        }
+      },
+      {
         label: 'Fridge',
         icon: 'pi pi-server',
         command: () => {
-          this.router.navigate(['/protected/fridge']);
+          this.router.navigate(['/protected/fridge']); // Corrected navigation path
         }
       },
       {
         label: 'Recipe',
         icon: 'pi pi-book',
         command: () => {
-          this.router.navigate(['/protected/recipe-search']);
+          this.router.navigate(['/protected/recipe-search']); // Corrected navigation path
         }
       },
       {
         label: 'Share Shopping List!',
         icon: 'pi pi-share-alt',
         command: () => {
-          this.router.navigate(['/protected/share-shopping-list']);
+          this.router.navigate(['/protected/share-shopping-list']); // Corrected navigation path
         }
       },
       {
         label: 'Update Account',
         icon: 'pi pi-user-edit',
         command: () => {
-          this.router.navigate(['/protected/update-account']);
+          this.router.navigate(['/protected/update-account']); // Corrected navigation path
         }
       },
       {
@@ -57,7 +65,6 @@ export class DashboardComponent {
   logout() {
     // Removes the jwt token from the local storage, so the user gets logged out & then navigate back to the "public" routes
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.router.navigate(['../../']);
+    this.router.navigate(['../../']); // Corrected navigation path
   }
-
 }

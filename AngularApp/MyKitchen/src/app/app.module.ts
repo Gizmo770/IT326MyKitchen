@@ -13,6 +13,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { PasswordModule } from 'primeng/password';
+import { MenubarModule } from 'primeng/menubar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { FridgeComponent } from './protected/components/fridge/fridge.component'
 import { RecipeSearchComponent } from './protected/components/recipe-search/recipe-search.component';
 import { ShareListComponent } from './protected/components/share-list/share-list.component';
 import { UpdateAccountComponent } from './protected/components/update-account/update-account.component';
+import { MenubarComponent } from './protected/components/menubar/menubar.component';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'myKitchen';
 
@@ -33,7 +36,8 @@ export function tokenGetter() {
     FridgeComponent,
     RecipeSearchComponent,
     ShareListComponent,
-    UpdateAccountComponent
+    UpdateAccountComponent,
+    MenubarComponent
   ],
   imports: [
     // PrimeNG Modules
@@ -44,6 +48,8 @@ export function tokenGetter() {
     InputTextModule,
     DialogModule,
     DropdownModule,
+    PasswordModule,
+    MenubarModule,
     // Angular Modules
     BrowserAnimationsModule,
     BrowserModule,

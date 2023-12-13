@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../interfaces';
 import { Account } from 'src/app/models/account';
+import { AccountService } from 'src/app/services/account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private snackbar: MatSnackBar,
-    private jwtService: JwtHelperService
+    private jwtService: JwtHelperService,
+    private accountService: AccountService
   ) {
     this.createAccountUrl = 'http://localhost:8081/account/create';
     this.validateLoginUrl = 'http://localhost:8081/account/login';
@@ -40,6 +42,7 @@ export class AuthService {
       tap((res: Account) => {
         if (res && res.userName) {
           localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, JSON.stringify(res.userName));
+          this.accountService.currentAccount = res;
           this.snackbar.open('Login Successful', 'Close', {
             duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
           });

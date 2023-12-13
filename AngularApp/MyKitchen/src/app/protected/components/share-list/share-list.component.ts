@@ -31,11 +31,11 @@ export class ShareListComponent implements OnInit {
   constructor(private emailService: EmailService, private accountService: AccountService) {}
 
   ngOnInit(): void {
-    //TESTING PURPOSES ONLY!!! TEST
-    this.accountService.currentAccount =
-    new Account(12, 'TestName', 'TestUsername', 'testpass' +
-    'test@example.com', '1234567890', '@txt.att.net', 5);
-    //TESTING PURPOSES ONLY!!! TEST
+    // //TESTING PURPOSES ONLY!!! TEST
+    // this.accountService.currentAccount =
+    // new Account(12, 'TestName', 'TestUsername', 'testpass' +
+    // 'test@example.com', '1234567890', '@txt.att.net', 5);
+    // //TESTING PURPOSES ONLY!!! TEST
     this.phoneCarriers = this.accountService.accountPhoneCarriers;
   }
 
