@@ -30,4 +30,16 @@ public class ShoppingListIngredient {
     public Ingredient getIngredient() {
         return ingredient;
     }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
 }

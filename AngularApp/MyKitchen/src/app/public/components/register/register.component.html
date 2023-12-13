@@ -1,4 +1,5 @@
 <div>
+    <h1>myKitchen User Registration</h1>
     <a [routerLink]="['../login']">Go to Login</a>
     <mat-card>
         <mat-card-title>Register</mat-card-title>
@@ -8,7 +9,7 @@
 
                 <mat-form-field>
                     <input type="email" matInput placeholder="Email" formControlName="email">
-                    <!-- Here we can display error messages/hints for the user, if one of the Validators adds an error to the email 
+                    <!-- Here we can display error messages/hints for the user, if one of the Validators adds an error to the email
              with the .touched check we only display the hints if the input was touched by the users -->
                     <mat-error
                         *ngIf="this.registerForm.get('email')?.touched && this.registerForm.get('email')?.hasError('required')">

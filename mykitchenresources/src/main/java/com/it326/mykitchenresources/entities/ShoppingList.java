@@ -1,5 +1,6 @@
 package com.it326.mykitchenresources.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class ShoppingList {
     // Association table for the list of ingredients in the shopping list.
     // In other words, a list of ShoppingListIngredient objects specifice
     // to represent the ingredients in the shopping list.
-    @OneToMany(mappedBy = "shoppingList")
+    @OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL)
     private List<ShoppingListIngredient> shoppingIngredients;
 
     public ShoppingList() {
@@ -47,5 +48,13 @@ public class ShoppingList {
 
     public void setIngredientsInShoppingList(List<ShoppingListIngredient> ingredients) {
         this.shoppingIngredients = ingredients;
+    }
+
+    public void addIngredientToShoppingList(ShoppingListIngredient newIng) {
+        this.shoppingIngredients.add(newIng);
+    }
+
+    public void removeIngredientFromShoppingList(ShoppingListIngredient ing) {
+        this.shoppingIngredients.remove(ing);
     }
 }
