@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Account } from 'src/app/models/account';
 import { AccountService } from 'src/app/services/account.service';
 
@@ -10,25 +9,12 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class UpdateAccountComponent implements OnInit {
 
-  updateAccountForm: FormGroup;
   updateAccountFields: any;
   accountPhoneCarriers: any;
 
-  constructor(private accountService: AccountService) {
-    this.updateAccountForm = new FormGroup({});
-  }
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.updateAccountForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'username': new FormControl(null, Validators.required),
-      'password': new FormControl(null, Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'phoneNumber': new FormControl(null, Validators.required),
-      'phoneCarrier': new FormControl(null, Validators.required),
-      'lowIngredientThreshold': new FormControl(null, Validators.required)
-    });
-
       //TESTING PURPOSES ONLY!!! TEST
       this.accountService.currentAccount =
         new Account(12, 'Gian Garnica', 'gjgarn1test', 'testpass' +

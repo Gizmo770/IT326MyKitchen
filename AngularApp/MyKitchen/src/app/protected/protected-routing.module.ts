@@ -18,7 +18,7 @@ const routes: Routes = [
         component: FridgeComponent
     },
     {
-        path: 'recipe-search',
+        path: 'components/recipe-search',
         component: RecipeSearchComponent
     },
     {

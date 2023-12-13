@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
+import { Menu } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -22,28 +23,28 @@ export class DashboardComponent {
         label: 'Fridge',
         icon: 'pi pi-server',
         command: () => {
-          this.router.navigate(['/protected/fridge']);
+          this.router.navigate(['../../components/fridge']);
         }
       },
       {
-        label: 'Recipes',
+        label: 'Recipe',
         icon: 'pi pi-book',
         command: () => {
-          this.router.navigate(['/protected/recipe-search']);
+          this.router.navigate(['../../components/recip-search']);
         }
       },
       {
         label: 'Share Shopping List!',
         icon: 'pi pi-share-alt',
         command: () => {
-          this.router.navigate(['/protected/share-shopping-list']);
+          this.router.navigate(['../../share-shopping-list']);
         }
       },
       {
         label: 'Update Account',
         icon: 'pi pi-user-edit',
         command: () => {
-          this.router.navigate(['/protected/update-account']);
+          this.router.navigate(['../../update-account']);
         }
       },
       {
