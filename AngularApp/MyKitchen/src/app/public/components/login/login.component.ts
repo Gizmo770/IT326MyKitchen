@@ -46,7 +46,7 @@ export class LoginComponent {
     if (!this.deleteForm.valid) {
       return;
     }
-    const idValue = this.currentAccount?.id ?? 0;
+    const idValue = this.currentAccount?.accountId ?? 0;
 
     this.authService.deleteAccount(idValue).pipe(
       tap(() => this.router.navigate(['../register']))

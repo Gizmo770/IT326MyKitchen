@@ -23,7 +23,7 @@ export class UpdateAccountComponent implements OnInit {
 
     this.updateAccountFields = {
       name: this.accountService.currentAccount ? this.accountService.currentAccount.name : '',
-      username: this.accountService.currentAccount ? this.accountService.currentAccount.username : '',
+      username: this.accountService.currentAccount ? this.accountService.currentAccount.userName : '',
       password: '',
       email: this.accountService.currentAccount ? this.accountService.currentAccount.email : '',
       phoneNumber: this.accountService.currentAccount ? this.accountService.currentAccount.phoneNumber : '',
@@ -35,7 +35,7 @@ export class UpdateAccountComponent implements OnInit {
   }
 
   updateAccount() {
-    if (!this.accountService.currentAccount || this.accountService.currentAccount.id === undefined) {
+    if (!this.accountService.currentAccount || this.accountService.currentAccount.accountId === undefined) {
       throw new Error('Current account or account ID is not defined');
     }
 

@@ -76,11 +76,11 @@ export class AccountService implements OnInit {
   //If returns true, then the account was deleted successfully
   //We should then return to the login page
   public deleteCurrentAccount(): Observable<boolean> {
-    if (!this.currentAccount || this.currentAccount.id === undefined) {
+    if (!this.currentAccount || this.currentAccount.accountId === undefined) {
       throw new Error('Current account or account ID is not defined');
     }
 
-    const params = new HttpParams().set('accountId', this.currentAccount.id.toString());    return this.http.delete(this.deleteAccountUrl, { params }).pipe(
+    const params = new HttpParams().set('accountId', this.currentAccount.accountId.toString());    return this.http.delete(this.deleteAccountUrl, { params }).pipe(
       map(response => response ? true : false)
     );
   }
@@ -90,12 +90,12 @@ export class AccountService implements OnInit {
     phoneNumber: string, phoneCarrier: string,
     lowIngredientThreshold: number): Observable<Account> {
 
-    if (!this.currentAccount || this.currentAccount.id === undefined) {
+    if (!this.currentAccount || this.currentAccount.accountId === undefined) {
       throw new Error('Current account or account ID is not defined');
     }
 
     const params = new HttpParams()
-      .set('accountId', this.currentAccount?.id.toString())
+      .set('accountId', this.currentAccount?.accountId.toString())
       .set('name', name)
       .set('username', username)
       .set('password', password)

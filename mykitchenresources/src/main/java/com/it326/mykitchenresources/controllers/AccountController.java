@@ -47,6 +47,9 @@ public class AccountController {
 
         try {
             Account account = accountService.login(username, password);
+            if(account == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
             return ResponseEntity.ok(account);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
@@ -38,9 +41,11 @@ public class Account {
     @Column(name = "ingredient_low_threshold")
     private Double ingredientLowThreshold;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ShoppingList shoppingList;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Fridge fridge;
     

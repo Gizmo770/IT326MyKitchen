@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProtectedRoutingModule } from './protected-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
+    MenuModule,
     // Import our Routes for this module
     ProtectedRoutingModule,
     // Angular Material Imports

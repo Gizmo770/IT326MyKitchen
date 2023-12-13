@@ -1,10 +1,10 @@
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FridgeComponent } from '../fridge/fridge.component';
-import { RecipeSearchComponent } from '../components/recipe-search/recipe-search.component';
-import { ShareListComponent } from '../components/share-list/share-list.component';
-import { UpdateAccountComponent } from '../components/update-account/update-account.component';
+import { FridgeComponent } from './components/fridge/fridge.component';
+import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
+import { ShareListComponent } from './components/share-list/share-list.component';
+import { UpdateAccountComponent } from './components/update-account/update-account.component';
 
 // Routes for child Module (protectedModule). Since protected module is lazy loaded in in the
 // app-routing.module the full path is `/protected/dashboard`

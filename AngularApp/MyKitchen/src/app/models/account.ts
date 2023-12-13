@@ -1,7 +1,7 @@
 export class Account {
-  id?: number;
+  accountId?: number;
   name?: string;
-  username?: string;
+  userName?: string;
   email?: string;
   phoneNumber?: string;
   phoneCarrier?: string;
@@ -12,9 +12,9 @@ export class Account {
   constructor(id: number, name: string, username: string,
     email: string, phoneNumber: string, phoneCarrier: string,
     lowIngredientThreshold: number) {
-    this.id = id;
+    this.accountId = id;
     this.name = name;
-    this.username = username;
+    this.userName = username;
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.phoneCarrier = phoneCarrier;

@@ -16,10 +16,10 @@ import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FridgeComponent } from './fridge/fridge.component';
-import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
-import { ShareListComponent } from './components/share-list/share-list.component';
-import { UpdateAccountComponent } from './components/update-account/update-account.component';
+import { FridgeComponent } from './protected/components/fridge/fridge.component';
+import { RecipeSearchComponent } from './protected/components/recipe-search/recipe-search.component';
+import { ShareListComponent } from './protected/components/share-list/share-list.component';
+import { UpdateAccountComponent } from './protected/components/update-account/update-account.component';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'myKitchen';
 
@@ -57,7 +57,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:3000', 'localhost:8080']
+        allowedDomains: ['localhost:4200', 'localhost:8081']
       }
     })
   ],

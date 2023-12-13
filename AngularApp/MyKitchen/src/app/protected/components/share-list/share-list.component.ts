@@ -43,7 +43,7 @@ export class ShareListComponent implements OnInit {
     if (this.emailForm) {
       const emailToSendTo = this.emailForm.get('emailToSendTo')?.value;
       if (emailToSendTo) {
-        this.emailService.sendShoppingListThroughEmail(this.accountService.currentAccount?.id ?? 0, emailToSendTo).subscribe();
+        this.emailService.sendShoppingListThroughEmail(this.accountService.currentAccount?.accountId ?? 0, emailToSendTo).subscribe();
         this.displayEmailModal = false;
       }
     }
@@ -54,7 +54,7 @@ export class ShareListComponent implements OnInit {
       const phoneNumberToSendTo = this.textForm.get('numberToSendTo')?.value;
       const recipientPhoneCarrier = this.textForm.get('recipientPhoneCarrier')?.value;
       if (phoneNumberToSendTo && recipientPhoneCarrier) {
-        this.emailService.sendShoppingListThroughText(this.accountService.currentAccount?.id ?? 0, phoneNumberToSendTo, recipientPhoneCarrier).subscribe();
+        this.emailService.sendShoppingListThroughText(this.accountService.currentAccount?.accountId ?? 0, phoneNumberToSendTo, recipientPhoneCarrier).subscribe();
         this.displayTextModal = false;
       }
     }

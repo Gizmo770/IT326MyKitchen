@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth-guard/auth.guard';
-import { FridgeComponent } from './fridge/fridge.component';
-import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
-import { ShareListComponent } from './components/share-list/share-list.component';
-import { UpdateAccountComponent } from './components/update-account/update-account.component';
+import { FridgeComponent } from './protected/components/fridge/fridge.component';
+import { RecipeSearchComponent } from './protected/components/recipe-search/recipe-search.component';
+import { ShareListComponent } from './protected/components/share-list/share-list.component';
+import { UpdateAccountComponent } from './protected/components/update-account/update-account.component';
 
 const routes: Routes = [
   {
