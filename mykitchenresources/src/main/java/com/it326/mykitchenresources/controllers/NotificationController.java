@@ -40,4 +40,26 @@ public class NotificationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error texting shopping list");
         }
     }
+
+    public ResponseEntity<String> notifyOfExpiredIngredientsTest() {
+        System.out.println("Notifying of expired ingredients...");
+
+        try {
+            emailService.notifyOfExpiredIngredients();
+            return ResponseEntity.ok("Notified of expired ingredients successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error notifying of expired ingredients");
+        }
+    }
+
+    public ResponseEntity<String> notifyOfLowIngredientsTest() {
+        System.out.println("Notifying of low ingredients...");
+
+        try {
+            emailService.notifyOfLowIngredients();
+            return ResponseEntity.ok("Notified of low ingredients successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error notifying of low ingredients");
+        }
+    }
 }

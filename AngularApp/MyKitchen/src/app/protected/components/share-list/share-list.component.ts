@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from 'src/app/models/account';
 
 import { AccountService } from 'src/app/services/account.service';
@@ -14,8 +15,8 @@ import { EmailService } from 'src/app/services/email.service';
 })
 export class ShareListComponent implements OnInit {
 
-  displayEmailModal: boolean = false;
-  displayTextModal: boolean = false;
+  displayEmailForm: boolean = false;
+  displayTextForm: boolean = false;
 
   emailForm = new FormGroup({
     emailToSendTo: new FormControl(''),
@@ -28,7 +29,10 @@ export class ShareListComponent implements OnInit {
 
   phoneCarriers: any;
 
-  constructor(private emailService: EmailService, private accountService: AccountService) {}
+  constructor(
+    private emailService: EmailService,
+    private accountService: AccountService,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     // //TESTING PURPOSES ONLY!!! TEST
@@ -40,23 +44,63 @@ export class ShareListComponent implements OnInit {
   }
 
   emailShoppingList() {
-    if (this.emailForm) {
+    const accountId = this.accountService.getCurrentAccount()?.accountId;
+    if (this.emailForm && accountId !== undefined) {
       const emailToSendTo = this.emailForm.get('emailToSendTo')?.value;
       if (emailToSendTo) {
-        this.emailService.sendShoppingListThroughEmail(this.accountService.currentAccount?.accountId ?? 0, emailToSendTo).subscribe();
-        this.displayEmailModal = false;
+        this.emailService.sendShoppingListThroughEmail(accountId, emailToSendTo).subscribe();
       }
+    } else {
+      this.snackBar.open('Account ID is not defined', 'Close', {
+        duration: 3000,
+      });
     }
   }
 
   textShoppingList() {
-    if (this.textForm) {
+    const accountId = this.accountService.getCurrentAccount()?.accountId;
+    if (this.textForm && accountId !== undefined) {
       const phoneNumberToSendTo = this.textForm.get('numberToSendTo')?.value;
       const recipientPhoneCarrier = this.textForm.get('recipientPhoneCarrier')?.value;
       if (phoneNumberToSendTo && recipientPhoneCarrier) {
-        this.emailService.sendShoppingListThroughText(this.accountService.currentAccount?.accountId ?? 0, phoneNumberToSendTo, recipientPhoneCarrier).subscribe();
-        this.displayTextModal = false;
+        this.emailService.sendShoppingListThroughText(accountId, phoneNumberToSendTo, recipientPhoneCarrier).subscribe();
       }
+    } else {
+      this.snackBar.open('Account ID is not defined', 'Close', {
+        duration: 3000,
+      });
     }
+  }
+
+  public toggleEmailForm() {
+    if(this.displayTextForm) {
+      this.displayTextForm = false;
+    }
+    if(!this.displayEmailForm) {
+      this.displayEmailForm = true;
+    } else {
+      this.displayEmailForm = false;
+    }
+  }
+
+  public toggleTextForm() {
+    if(this.displayEmailForm) {
+      this.displayEmailForm = false;
+    }
+    if(!this.displayTextForm) {
+      this.displayTextForm = true;
+    } else {
+      this.displayTextForm = false;
+    }
+  }
+
+
+  //TESTING
+  public testNotifyExpired() {
+    this.emailService.testNotifyExpired().subscribe();
+  }
+
+  public testNotifyLow() {
+    this.emailService.testNotifyLow().subscribe();
   }
 }

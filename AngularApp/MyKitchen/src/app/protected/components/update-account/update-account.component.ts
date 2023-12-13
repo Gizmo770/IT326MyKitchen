@@ -18,26 +18,26 @@ export class UpdateAccountComponent implements OnInit {
 
   ngOnInit(): void {
       // //TESTING PURPOSES ONLY!!! TEST
-      // this.accountService.currentAccount =
+      // this.accountService.getCurrentAccount() =
       //   new Account(12, 'Gian Garnica', 'gjgarn1test', 'testpass' +
       //   'gjgarn1@ilstu.edu', '8157355994', 'AT&T', 1);
       // //TESTING PURPOSES ONLY!!! TEST
 
     this.updateAccountFields = {
-      name: this.accountService.currentAccount ? this.accountService.currentAccount.name : '',
-      username: this.accountService.currentAccount ? this.accountService.currentAccount.userName : '',
+      name: this.accountService.getCurrentAccount()?.name,
+      username: this.accountService.getCurrentAccount()?.userName,
       password: '',
-      email: this.accountService.currentAccount ? this.accountService.currentAccount.email : '',
-      phoneNumber: this.accountService.currentAccount ? this.accountService.currentAccount.phoneNumber : '',
-      phoneCarrier: this.accountService.currentAccount ? this.accountService.currentAccount.phoneCarrier : '',
-      lowIngredientThreshold: this.accountService.currentAccount ? this.accountService.currentAccount.lowIngredientThreshold : null,
+      email: this.accountService.getCurrentAccount()?.email,
+      phoneNumber: this.accountService.getCurrentAccount()?.phoneNumber,
+      phoneCarrier: this.accountService.getCurrentAccount()?.phoneCarrier,
+      lowIngredientThreshold: this.accountService.getCurrentAccount()?.lowIngredientThreshold
     };
 
     this.accountPhoneCarriers = this.accountService.accountPhoneCarriers;
   }
 
   updateAccount() {
-    if (!this.accountService.currentAccount || this.accountService.currentAccount.accountId === undefined) {
+    if (!this.accountService.getCurrentAccount() === undefined) {
       throw new Error('Current account or account ID is not defined');
     }
 
@@ -47,7 +47,9 @@ export class UpdateAccountComponent implements OnInit {
 
     if (!this.updateAccountFields.name || !this.updateAccountFields.username ||
       !this.updateAccountFields.password || !this.updateAccountFields.email || !this.updateAccountFields.phoneNumber) {
-      throw new Error('One or more account fields are not defined');
+      this.snackBar.open('One or more account fields are not defined', 'Close', {
+        duration: 3000,
+      });
     }
 
     if (!this.updateAccountFields.phoneCarrier) {
@@ -68,7 +70,7 @@ export class UpdateAccountComponent implements OnInit {
       this.updateAccountFields.lowIngredientThreshold
     ).subscribe(updatedAccount => {
       console.log('Account updated:', updatedAccount);
-      this.accountService.currentAccount = updatedAccount;
+      this.accountService.setCurrentAccount(updatedAccount);
       this.snackBar.open('Account updated successfully', 'Close', {
         duration: 3000,
       });

@@ -1,4 +1,20 @@
-.send-modal {
-  width: 80%; /* or any other percentage or fixed size you want */
-  max-width: 80%; /* or any other percentage or fixed size you want */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 35vh;
+  gap: 10px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px; // Add some padding to prevent the form from touching the edges of the screen
+}
+
+.selected {
+  background-color: #007bff;
+  color: white;
 }

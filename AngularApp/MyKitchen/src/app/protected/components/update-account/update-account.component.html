@@ -19,10 +19,7 @@
         <input [(ngModel)]="updateAccountFields.phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number" required>
       </div>
       <div class="form-group">
-        <select [(ngModel)]="updateAccountFields.phoneCarrier" name="phoneCarrier" class="form-control" required>
-          <option value="" disabled selected>Select a phone carrier</option>
-          <option *ngFor="let carrier of accountPhoneCarriers" [value]="carrier.value">{{carrier.label}}</option>
-        </select>
+        <p-dropdown [(ngModel)]="updateAccountFields.phoneCarrier" name="phoneCarrier" [options]="accountPhoneCarriers" optionLabel="label" optionValue="value" placeholder="Select a phone carrier" [required]="true"></p-dropdown>
       </div>
       <div class="form-group">
         <input [(ngModel)]="updateAccountFields.lowIngredientThreshold" name="lowIngredientThreshold" class="form-control" placeholder="Low Ingredient Threshold" required>

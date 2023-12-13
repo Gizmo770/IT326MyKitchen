@@ -1,22 +1,36 @@
-<!-- Button to open email modal -->
-<p-button label="Email Shopping List" (click)="displayEmailModal = true"></p-button>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<!-- Email Modal -->
-<p-dialog class="send-modal" header="Email Shopping List" [(visible)]="displayEmailModal" [modal]="true" [style]="{width: '50vw'}">
-    <form [formGroup]="emailForm" (ngSubmit)="emailShoppingList()">
-        <input type="text" formControlName="emailToSendTo" placeholder="Enter email recipient">
-        <p-button type="submit" label="Send"></p-button>
-    </form>
-</p-dialog>
+<div class="parent-container">
+  <div class="button-container">
+    <!-- Button to open email modal -->
+    <p-button [ngClass]="{'selected': displayEmailForm}" label="Email Shopping List" (click)="toggleEmailForm()"></p-button>
 
-<!-- Button to open text modal -->
-<p-button label="Text Shopping List" (click)="displayTextModal = true"></p-button>
+    <!-- Button to open text modal -->
+    <p-button [ngClass]="{'selected': displayTextForm}" label="Text Shopping List" (click)="toggleTextForm()"></p-button>
 
-<!-- Text Modal -->
-<p-dialog header="Text Shopping List" [(visible)]="displayTextModal" [modal]="true" [style]="{width: '50vw'}">
-    <form [formGroup]="textForm" (ngSubmit)="textShoppingList()">
-        <input type="text" formControlName="numberToSendTo" placeholder="Enter phone number">
-        <p-dropdown formControlName="recipientPhoneCarrier" [options]="phoneCarriers" placeholder="Please pick a carrier to send to"></p-dropdown>
-        <p-button type="submit" label="Send"></p-button>
-    </form>
-</p-dialog>
+    <p-button label="TEST: Notify all users of expired ingredients" (click)="testNotifyExpired()"></p-button>
+
+    <p-button label="TEST: Notify all users of low ingredients" (click)="testNotifyLow()"></p-button>
+  </div>
+
+  <div class="form-container">
+    <div class="row">
+      <!-- Email Modal -->
+      <div *ngIf="displayEmailForm == true">
+        <form [formGroup]="emailForm" (ngSubmit)="emailShoppingList()">
+          <input type="text" formControlName="emailToSendTo" placeholder="Enter email recipient">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+
+      <!-- Text Modal -->
+      <div *ngIf="displayTextForm == true">
+        <form [formGroup]="textForm" (ngSubmit)="textShoppingList()">
+          <input type="text" formControlName="numberToSendTo" placeholder="Enter phone number">
+          <p-dropdown formControlName="recipientPhoneCarrier" [options]="phoneCarriers" placeholder="Please pick a carrier to send to"></p-dropdown>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

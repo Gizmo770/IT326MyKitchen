@@ -42,7 +42,7 @@ export class AuthService {
       tap((res: Account) => {
         if (res && res.userName) {
           localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, JSON.stringify(res.userName));
-          this.accountService.currentAccount = res;
+          this.accountService.setCurrentAccount(res);
           this.snackbar.open('Login Successful', 'Close', {
             duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
           });

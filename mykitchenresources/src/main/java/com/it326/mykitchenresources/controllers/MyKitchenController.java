@@ -161,4 +161,16 @@ public class MyKitchenController {
         @RequestParam String recipientPhoneCarrier) {
         return notificationController.textShoppingList(currentAccId, phoneNumberToSendTo, recipientPhoneCarrier);
     }
+
+    @PostMapping("/notify/expired")
+    @ResponseBody
+    public ResponseEntity<String> notifyOfExpiredIngredientsTest() {
+        return notificationController.notifyOfExpiredIngredientsTest();
+    }
+
+    @PostMapping("/notify/low")
+    @ResponseBody
+    public ResponseEntity<String> notifyOfLowIngredientsTest() {
+        return notificationController.notifyOfLowIngredientsTest();
+    }
 }

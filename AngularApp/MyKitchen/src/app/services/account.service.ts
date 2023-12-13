@@ -9,7 +9,26 @@ import { Account } from '../models/account';
 })
 export class AccountService implements OnInit {
 
-  public currentAccount?: Account;
+  private currentAccount?: Account;
+
+  public getCurrentAccount(): Account | undefined {
+    if (!this.currentAccount) {
+      const storedAccount = localStorage.getItem('currentAccount');
+      if (storedAccount) {
+        this.currentAccount = JSON.parse(storedAccount);
+      }
+    }
+    return this.currentAccount;
+  }
+
+  public setCurrentAccount(account: Account | undefined) {
+    this.currentAccount = account;
+    if (account) {
+      localStorage.setItem('currentAccount', JSON.stringify(account));
+    } else {
+      localStorage.removeItem('currentAccount');
+    }
+  }
 
   private createAccountUrl: string;
   private validateLoginUrl: string;
