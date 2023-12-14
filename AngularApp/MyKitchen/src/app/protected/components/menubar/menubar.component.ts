@@ -34,10 +34,10 @@ export class MenubarComponent {
         }
       },
       {
-        label: 'Recipe',
-        icon: 'pi pi-book',
+        label: 'Shopping List',
+        icon: 'pi pi-shopping-cart',
         command: () => {
-          this.router.navigate(['/protected/recipe-search']); // Corrected navigation path
+          this.router.navigate(['/protected/shopping-list']); // Corrected navigation path
         }
       },
       {
@@ -45,6 +45,13 @@ export class MenubarComponent {
         icon: 'pi pi-share-alt',
         command: () => {
           this.router.navigate(['/protected/share-shopping-list']); // Corrected navigation path
+        }
+      },
+      {
+        label: 'Recipe',
+        icon: 'pi pi-book',
+        command: () => {
+          this.router.navigate(['/protected/recipe-search']); // Corrected navigation path
         }
       },
       {

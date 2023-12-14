@@ -5,6 +5,7 @@ import { FridgeComponent } from './components/fridge/fridge.component';
 import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
 import { ShareListComponent } from './components/share-list/share-list.component';
 import { UpdateAccountComponent } from './components/update-account/update-account.component';
+import { ShoplistComponent } from './components/shoplist/shoplist.component';
 
 // Routes for child Module (protectedModule). Since protected module is lazy loaded in in the
 // app-routing.module the full path is `/protected/dashboard`
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
       path: 'fridge',
       component: FridgeComponent
+  },
+  {
+      path: 'shopping-list',
+      component: ShoplistComponent
   },
   {
       path: 'recipe-search',

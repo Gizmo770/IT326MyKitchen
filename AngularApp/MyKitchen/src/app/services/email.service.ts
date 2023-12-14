@@ -66,13 +66,13 @@ export class EmailService {
   public testNotifyExpired(): Observable<any> {
     return this.http.post(this.testNotifyExpiredUrl, {}, { responseType: 'text' }).pipe(
       tap(() => {
-        this.snackBar.open('Test notification sent', 'Close', { duration: 2000 });
+        this.snackBar.open('Test notification sent', 'Close', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' });
         setTimeout(() => {
           location.reload();
         }, 2000);
       }),
       catchError(error => {
-        this.snackBar.open('SERVER ERROR: Failed to send test notification', 'Close', { duration: 2000 });
+        this.snackBar.open('SERVER ERROR: Failed to send test notification', 'Close', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' });
         return throwError(error);
       })
     );

@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FridgeService } from './fridge.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
+import { Ingredient } from 'src/app/models/account';
 
-interface Fridge {
-  id: number;
-  name: string;
-  ingredients: string[];
-}
+import { IngredientsService } from 'src/app/services/ingredients.service';
 
 @Component({
   selector: 'app-fridge',
@@ -13,47 +10,53 @@ interface Fridge {
   styleUrls: ['./fridge.component.scss'],
 })
 export class FridgeComponent implements OnInit {
-  fridges: Fridge[] = [];
-  newFridgeName: string = '';
-  updatedFridgeName: string = '';
-  updatedIngredients: string = '';
+  @ViewChild('dt', { static: false }) dt!: Table;
 
-  constructor(private fridgeService: FridgeService) { }
+  ingredients: Ingredient[];
 
-  ngOnInit() {
-    this.loadFridges();
+  constructor(private ingredientService: IngredientsService) {
+    this.ingredients = [];
   }
 
-  private loadFridges() {
-    this.fridgeService.getFridges().subscribe((fridges: Fridge[]) => {
-      this.fridges = fridges;
+  ngOnInit() {
+    this.getIngredients();
+  }
+
+  getIngredients(): void {
+    this.ingredientService.getFridgeIngredients().subscribe(ingredients => {
+      this.ingredients = ingredients;
     });
   }
 
-  createFridge() {
-    const newFridge: Fridge = {
-      id: this.fridges.length + 1,
-      name: this.newFridgeName,
-      ingredients: [],
+  addIngredient(): void {
+    // Create a new ingredient with default values
+    const newIngredient: Ingredient = {
+      ingredientId: 0, // This should be replaced with a real ID
+      name: '',
+      quantity: 0
     };
-    this.fridgeService.createFridge(newFridge);
-    this.newFridgeName = ''; // Clear the input field
+
+    // Add the new ingredient to the array
+    this.ingredients.push(newIngredient);
   }
 
-  updateFridge(fridge: Fridge) {
-    const updatedFridge: Fridge = {
-      ...fridge,
-      name: this.updatedFridgeName || fridge.name,
-      ingredients: this.updatedIngredients
-        ? this.updatedIngredients.split(',').map((i) => i.trim())
-        : fridge.ingredients,
-    };
-    this.fridgeService.updateFridge(updatedFridge);
-    this.updatedFridgeName = ''; // Clear the input field
-    this.updatedIngredients = '';
+  deleteIngredient(ingredient: Ingredient): void {
+    // Find the index of the ingredient in the array
+    const index = this.ingredients.indexOf(ingredient);
+
+    // If the ingredient is found, remove it from the array
+    if (index !== -1) {
+      this.ingredients.splice(index, 1);
+    }
   }
 
-  deleteFridge(fridge: Fridge) {
-    this.fridgeService.deleteFridge(fridge.id);
+  updateIngredient(ingredient: Ingredient): void {
+    // Implement your logic to update the ingredient here.
+    // This could involve calling an API to update the ingredient on the server.
   }
+
+  saveFridgeIngredients(): void {
+    this.ingredientService.setFridgeIngredients(this.ingredients);
+  }
+
 }

@@ -1,5 +1,6 @@
 package com.it326.mykitchenresources.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,7 +21,7 @@ public class ShoppingListIngredient {
     // This class contains an ingredient and a prirority 
     // for that ingredient, somewhat of an "extends" relationship.
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
@@ -41,5 +42,9 @@ public class ShoppingListIngredient {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }

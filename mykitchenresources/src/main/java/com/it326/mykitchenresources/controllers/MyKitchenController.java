@@ -1,5 +1,6 @@
 package com.it326.mykitchenresources.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it326.mykitchenresources.entities.Account;
+import com.it326.mykitchenresources.entities.Ingredient;
+import com.it326.mykitchenresources.entities.ShoppingList;
+import com.it326.mykitchenresources.entities.ShoppingListIngredient;
 import com.it326.mykitchenresources.entities.recipe.RecipeDetails;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -94,10 +99,20 @@ public class MyKitchenController {
         return shoppingListController.createShoppingList(currentAccId);
     }
 
-    //TODO: Method for adding ingredient to shopping list
+    @RequestMapping("/shopping-list/get-list")
+    @ResponseBody
+    public ResponseEntity<List<ShoppingListIngredient>> getListItems(
+        @RequestParam Integer currentAccId) {
+        return shoppingListController.getListItems(currentAccId);
+    }
 
-    //TODO: Method for removing ingredient from shopping list
-
+    @PostMapping("/shopping-list/update-list")
+    @ResponseBody
+    public ResponseEntity<String> updateShoppingListIngredients(
+        @RequestParam Integer currentAccId,
+        @RequestBody List<ShoppingListIngredient> listItems) {
+        return shoppingListController.updateShoppingListIngredients(currentAccId, listItems);
+    }
 
     /* --------------------------
     Fridge Controller Functions
@@ -121,7 +136,20 @@ public class MyKitchenController {
         return fridgeController.addIngredientToFridge(currentAccId, ingName, ingQuantity, ingExpDate);
     }
 
-    //TODO: Method for removing ingredient from fridge
+    @RequestMapping("/fridge/get-ingredients")
+    @ResponseBody
+    public ResponseEntity<List<Ingredient>> getFridgeIngredients(
+        @RequestParam Integer currentAccId) {
+        return fridgeController.getFridgeIngredients(currentAccId);
+    }
+
+    @PostMapping("/fridge/update-ingredients")
+    @ResponseBody
+    public ResponseEntity<String> updateFridgeIngredients(
+        @RequestParam Integer currentAccId,
+        @RequestBody List<Ingredient> listIngredients) {
+        return fridgeController.updateFridgeIngredients(currentAccId, listIngredients);
+    }
 
 
     /* --------------------------

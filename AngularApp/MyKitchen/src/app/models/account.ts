@@ -23,18 +23,26 @@ export class Account {
 }
 
 export class Fridge {
-  id?: number;
-  ingredients?: Ingredient[];
+  fridgeId?: number;
+  Account?: Account;
+  fridgeIngredients?: Ingredient[];
 }
 
 export class ShoppingList {
-  id?: number;
-  ingredients?: Ingredient[];
+  listId?: number;
+  account?: Account;
+  shoppingIngredients?: ShoppingListIngredient[];
 }
 
 export class Ingredient {
-  id?: number;
+  ingredientId?: number;
   name?: string;
   quantity?: number;
   expirationDate?: Date;
+}
+
+export class ShoppingListIngredient {
+  shoppingList?: ShoppingList;
+  ingredient?: Ingredient;
+  priority?: number;
 }

@@ -15,6 +15,8 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { PasswordModule } from 'primeng/password';
 import { MenubarModule } from 'primeng/menubar';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { RecipeSearchComponent } from './protected/components/recipe-search/reci
 import { ShareListComponent } from './protected/components/share-list/share-list.component';
 import { UpdateAccountComponent } from './protected/components/update-account/update-account.component';
 import { MenubarComponent } from './protected/components/menubar/menubar.component';
+import { ShoplistComponent } from './protected/components/shoplist/shoplist.component';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'myKitchen';
 
@@ -37,7 +40,8 @@ export function tokenGetter() {
     RecipeSearchComponent,
     ShareListComponent,
     UpdateAccountComponent,
-    MenubarComponent
+    MenubarComponent,
+    ShoplistComponent
   ],
   imports: [
     // PrimeNG Modules
@@ -50,6 +54,7 @@ export function tokenGetter() {
     DropdownModule,
     PasswordModule,
     MenubarModule,
+    TableModule,
     // Angular Modules
     BrowserAnimationsModule,
     BrowserModule,
@@ -60,6 +65,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     MatSnackBarModule,
     HttpClientModule,
+    CalendarModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

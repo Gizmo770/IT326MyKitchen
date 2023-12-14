@@ -49,38 +49,41 @@ public class EmailService {
         Date oneWeekFromNow = weekFromNowCalendar.getTime();
 
         for (Account account : accountService.findAll()) {
-            List<Ingredient> expIngredients = new ArrayList<Ingredient>();
-            Fridge fridge = fridgeService.getFridgeByAccountId(account.getAccountId());
-            for (Ingredient ingredient : fridge.getIngredients()) {
-                if (ingredient.getExpirationDate() != null) {
-                    if(ingredient.getExpirationDate().after(currentDate) 
-                    || ingredient.getExpirationDate().before(oneWeekFromNow)) {
-                        expIngredients.add(ingredient);
+            if(account != null) {
+                List<Ingredient> expIngredients = new ArrayList<Ingredient>();
+                Fridge fridge = fridgeService.getFridgeByAccountId(account.getAccountId());
+                for (Ingredient ingredient : fridge.getIngredients()) {
+                    if (ingredient.getExpirationDate() != null) {
+                        if(ingredient.getExpirationDate().after(currentDate) 
+                        || ingredient.getExpirationDate().before(oneWeekFromNow)) {
+                            expIngredients.add(ingredient);
+                        }
+                    }
+                }
+                
+                if (!expIngredients.isEmpty()) {
+                    String phoneNumber = account.getPhoneNumber();
+                    String email = account.getEmail();
+                    if(email != null) {
+                        SimpleMailMessage message = buildExpiringMessage(expIngredients, email);
+                        emailSender.send(message);
+                    }
+                    if(phoneNumber != null) {
+                        phoneNumber = phoneNumber + phoneCarrierToEmail(account.getPhoneCarrier());
+                        SimpleMailMessage message = buildExpiringMessage(expIngredients, phoneNumber);
+                        emailSender.send(message);
                     }
                 }
             }
-            
-            if (!expIngredients.isEmpty()) {
-                String phoneNumber = account.getPhoneNumber();
-                String email = account.getEmail();
-                if(email != null) {
-                    SimpleMailMessage message = buildExpiringMessage(expIngredients, email);
-                    emailSender.send(message);
-                }
-                if(phoneNumber != null) {
-                    phoneNumber = phoneNumber + phoneCarrierToEmail(account.getPhoneCarrier());
-                    SimpleMailMessage message = buildExpiringMessage(expIngredients, phoneNumber);
-                    emailSender.send(message);
-                }
-            }
-        }               
+        }
     }
 
     @Scheduled(cron = "0 0 12 * * ?")
     @Transactional
     public void notifyOfLowIngredients() {
             
-            for (Account account : accountService.findAll()) {
+        for (Account account : accountService.findAll()) {
+            if(account != null) {
                 List<Ingredient> lowIngredientsList = new ArrayList<Ingredient>();
                 Fridge fridge = fridgeService.getFridgeByAccountId(account.getAccountId());
                 for (Ingredient ingredient : fridge.getIngredients()) {
@@ -105,6 +108,7 @@ public class EmailService {
                     }
                 }
             }
+        }
     }
 
     public void emailShoppingList(Integer accountId, String emailToSendTo) {

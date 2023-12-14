@@ -1,5 +1,6 @@
 package com.it326.mykitchenresources.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.it326.mykitchenresources.entities.Ingredient;
 import com.it326.mykitchenresources.services.FridgeService;
 
 @RestController
@@ -42,6 +44,30 @@ public class FridgeController {
             return ResponseEntity.ok().body("Ingredient added to fridge successfully");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error adding ingredient to fridge");
+        }
+    }
+
+    public ResponseEntity<List<Ingredient>> getFridgeIngredients(Integer accountId) {
+        System.out.println("Getting fridge ingredients...");
+
+        // Get the ingredients from the fridge
+        try {
+            List<Ingredient> ingredients = fridgeService.getFridgeIngredients(accountId);
+            return ResponseEntity.ok().body(ingredients);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    public ResponseEntity<String> updateFridgeIngredients(Integer accountId, List<Ingredient> ingredients) {
+        System.out.println("Updating fridge ingredients...");
+
+        // Update the ingredients in the fridge
+        try {
+            fridgeService.updateFridgeIngredients(accountId, ingredients);
+            return ResponseEntity.ok().body("Fridge ingredients updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error updating fridge ingredients");
         }
     }
 }

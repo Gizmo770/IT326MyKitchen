@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it326.mykitchenresources.dbs.IngredientDb;
 import com.it326.mykitchenresources.dbs.ShoppingListDb;
 import com.it326.mykitchenresources.entities.Ingredient;
 import com.it326.mykitchenresources.entities.ShoppingList;
@@ -16,6 +17,9 @@ public class ShoppingListService {
 
     @Autowired
     private ShoppingListDb shoppingListDb;
+
+    @Autowired
+    private IngredientDb ingredientDb;
 
     @Autowired
     private AccountService accountService;
@@ -44,5 +48,41 @@ public class ShoppingListService {
         }
 
         return ingredients;
+    }
+
+    public List<ShoppingListIngredient> getListItems(Integer accountId) {
+
+        ShoppingList shoppingList = findShoppingList(accountId);
+        return shoppingList.getIngredientsInShoppingList();
+    }
+
+    public void updateShoppingListIngredients(Integer accountId, List<ShoppingListIngredient> listItems) {
+
+        ShoppingList shoppingList = findShoppingList(accountId);
+
+        // Clear the existing list
+        shoppingList.getIngredientsInShoppingList().clear();
+
+
+        List<ShoppingListIngredient> updatedList = new ArrayList<ShoppingListIngredient>();
+
+        for(ShoppingListIngredient listItem : listItems) {
+            Ingredient thisIngredient = listItem.getIngredient();
+            List<Ingredient> matchIngredients = ingredientDb.findAllByName(thisIngredient.getName());
+
+            if(matchIngredients.isEmpty()) {
+                thisIngredient = ingredientDb.save(thisIngredient);
+                listItem.setIngredient(thisIngredient);
+            } else {
+                thisIngredient = matchIngredients.get(0);
+                listItem.setIngredient(thisIngredient);
+            }
+
+            listItem.setShoppingList(shoppingList);
+
+            shoppingList.getIngredientsInShoppingList().add(listItem);
+        }
+
+        shoppingListDb.save(shoppingList);
     }
 }

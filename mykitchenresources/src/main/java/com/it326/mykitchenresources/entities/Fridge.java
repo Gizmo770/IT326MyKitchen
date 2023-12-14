@@ -2,6 +2,7 @@ package com.it326.mykitchenresources.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Fridge {
     // We don't need a separate class for this association table
     // as we don't need to store any additional information as 
     // opposed to the shopping list.
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "fridge_ingredients",
         joinColumns = @JoinColumn(name = "fridge_id"),

@@ -28,7 +28,7 @@ public class ShoppingList {
     // Association table for the list of ingredients in the shopping list.
     // In other words, a list of ShoppingListIngredient objects specifice
     // to represent the ingredients in the shopping list.
-    @OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShoppingListIngredient> shoppingIngredients;
 
     public ShoppingList() {
@@ -46,8 +46,11 @@ public class ShoppingList {
         return this.shoppingIngredients;
     }
 
-    public void setIngredientsInShoppingList(List<ShoppingListIngredient> ingredients) {
-        this.shoppingIngredients = ingredients;
+    public void setIngredientsInShoppingList(List<ShoppingListIngredient> newIngredients) {
+        this.shoppingIngredients.clear();
+        if (newIngredients != null) {
+            this.shoppingIngredients.addAll(newIngredients);
+        }
     }
 
     public void addIngredientToShoppingList(ShoppingListIngredient newIng) {

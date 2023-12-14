@@ -14,6 +14,7 @@ import com.it326.mykitchenresources.dbs.FridgeDb;
 import com.it326.mykitchenresources.dbs.IngredientDb;
 import com.it326.mykitchenresources.entities.Fridge;
 import com.it326.mykitchenresources.entities.Ingredient;
+import com.it326.mykitchenresources.entities.ShoppingListIngredient;
 
 @Service
 public class FridgeService {
@@ -77,31 +78,43 @@ public class FridgeService {
     return searchResults;
 }
 
-public void updateIngredient(Integer accountId, Long ingredientId, String newName, Double newQuantity, String newExpDate) {
-    Fridge fridgeData = getFridgeByAccountId(accountId);
+    public void updateIngredient(Integer accountId, Long ingredientId, String newName, Double newQuantity, String newExpDate) {
+        Fridge fridgeData = getFridgeByAccountId(accountId);
 
-    for (Ingredient ingredient : fridgeData.getIngredients()) {
-        if (ingredient.getIngredientId().equals(ingredientId)) {
-            ingredient.setName(newName);
-            ingredient.setQuantity(newQuantity);
-            try {
-                Date convertedDate = new SimpleDateFormat("yyyy-MM-dd").parse(newExpDate);
-                ingredient.setExpirationDate(convertedDate);
-            } catch (ParseException e) {
-                System.out.println("Error converting date");
+        for (Ingredient ingredient : fridgeData.getIngredients()) {
+            if (ingredient.getIngredientId().equals(ingredientId)) {
+                ingredient.setName(newName);
+                ingredient.setQuantity(newQuantity);
+                try {
+                    Date convertedDate = new SimpleDateFormat("yyyy-MM-dd").parse(newExpDate);
+                    ingredient.setExpirationDate(convertedDate);
+                } catch (ParseException e) {
+                    System.out.println("Error converting date");
+                }
+                break;
             }
-            break;
         }
+
+        fridgeDb.save(fridgeData);
     }
 
-    fridgeDb.save(fridgeData);
-}
+    public void deleteIngredient(Integer accountId, Long ingredientId) {
+        Fridge fridgeData = getFridgeByAccountId(accountId);
 
-public void deleteIngredient(Integer accountId, Long ingredientId) {
-    Fridge fridgeData = getFridgeByAccountId(accountId);
+        fridgeData.getIngredients().removeIf(ingredient -> ingredient.getIngredientId().equals(ingredientId));
 
-    fridgeData.getIngredients().removeIf(ingredient -> ingredient.getIngredientId().equals(ingredientId));
+        fridgeDb.save(fridgeData);
+    }
 
-    fridgeDb.save(fridgeData);
-}
+    public void updateFridgeIngredients(Integer accountId, List<Ingredient> ingredients) {
+
+        Fridge fridgeData = getFridgeByAccountId(accountId);
+        fridgeData.setIngredients(ingredients);
+        fridgeDb.save(fridgeData);
+    }
+
+    public List<Ingredient> getFridgeIngredients(Integer accountId) {
+        Fridge fridgeData = getFridgeByAccountId(accountId);
+        return fridgeData.getIngredients();
+    }
 }

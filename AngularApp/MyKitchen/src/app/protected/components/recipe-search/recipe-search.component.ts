@@ -27,4 +27,15 @@ export class RecipeSearchComponent {
       }
     );
   }
+
+  public searchRecipeByFridge(): void {
+    this.recipeService.searchRecipeByFridge().subscribe(
+      (response: RecipeDetails[]) => {
+        this.recipes = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 }

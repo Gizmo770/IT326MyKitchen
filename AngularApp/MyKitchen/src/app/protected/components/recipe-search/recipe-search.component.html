@@ -1,14 +1,33 @@
-<h1>Recipe Search</h1>>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 
 <!-- Search Field and Button  -->
-<input pInputText [(ngModel)]="searchString" name="searchString" placeholder="Search recipes...">
-<p-button label="Search" (click)="searchRecipeByString(searchString)"></p-button>
+<div class="container">
+  <h1>Recipe Search</h1>
+  <input [(ngModel)]="searchString" name="searchString" placeholder="Search recipes manually...">
+  <div class="search-btns">
+    <div class="btn1">
+      <p-button label="Search by string" (click)="searchRecipeByString(searchString)"></p-button>
+    </div>
+    <div class="btn2">
+      <p-button label="Search by fridge" (click)="searchRecipeByFridge()"></p-button>
+    </div>
+  </div>
+</div>
 
 
 <!-- Display -->
-<div *ngFor="let recipe of recipes">
-  <h2>{{recipe.label}}</h2>
-  <img [src]="recipe.image" alt="{{recipe.label}}">
-  <p>Calories: {{recipe.calories}}</p>
-  <p>Link: {{recipe.url}}</p>
+<div class="recipe-grid">
+  <div class="recipe-card" *ngFor="let recipe of recipes">
+    <p-card>
+      <p-header>
+        <img [src]="recipe.image" alt="{{recipe.label}}" class="recipe-image">
+      </p-header>
+      <h2>{{recipe.label}}</h2>
+      <p>Calories: {{recipe.calories | number:'1.0-0'}}</p>
+      <p-footer class="view-button">
+        <a [href]="recipe.url" target="_blank" class="recipe-link">View Recipe</a>
+      </p-footer>
+    </p-card>
+  </div>
 </div>
