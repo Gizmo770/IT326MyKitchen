@@ -19,4 +19,8 @@ export class RecipeService {
     const params = new HttpParams().set('ingredients', searchString);
     return this.http.get<RecipeDetails[]>(this.searchRecipeUrl, { params });
   }
+
+  public filterRecipesByCalories(recipes: RecipeDetails[], maxCalories: number): RecipeDetails[] {
+    return recipes.filter(recipe => recipe.calories !== undefined && recipe.calories <= maxCalories);
+  }
 }

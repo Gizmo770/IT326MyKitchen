@@ -7,7 +7,7 @@ import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
-  styleUrl: './menubar.component.scss'
+  styleUrls: ['./menubar.component.scss']
 })
 export class MenubarComponent {
 

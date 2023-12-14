@@ -1,8 +1,8 @@
 <h1>Recipe Search</h1>>
 
 <!-- Search Field and Button  -->
-<input pInputText [(ngModel)]="searchString" name="searchString" placeholder="Search recipes...">
-<p-button label="Search" (click)="searchRecipeByString(searchString)"></p-button>
+<input pInputText [formControl]="searchControl" name="searchString" placeholder="Search recipes...">
+<input pInputText [formControl]="calorieControl" name="calorieFilter" placeholder="Calorie filter...">
 
 
 <!-- Display -->
